@@ -18,9 +18,10 @@ import java.awt.Font;
 
 public class Login extends JFrame {
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	
+	private JTextField user;
+	private JTextField password;
+	private JButton loginButton;
+
 	/**
 	 * Create the frame.
 	 */
@@ -48,23 +49,48 @@ public class Login extends JFrame {
 		lblContrasea.setBounds(68, 122, 97, 19);
 		layeredPane.add(lblContrasea);
 		
-		textField = new JTextField();
-		textField.setBounds(206, 68, 116, 22);
-		layeredPane.add(textField);
-		textField.setColumns(10);
+		user = new JTextField();
+		user.setBounds(206, 68, 116, 22);
+		layeredPane.add(user);
+		user.setColumns(10);
 		
-		textField_1 = new JPasswordField();
-		textField_1.setBounds(206, 122, 116, 22);
-		layeredPane.add(textField_1);
-		textField_1.setColumns(10);
+		password = new JPasswordField();
+		password.setBounds(206, 122, 116, 22);
+		layeredPane.add(password);
+		password.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Iniciar");
-		btnNewButton.addActionListener(new ActionListener() {
+		loginButton = new JButton("Iniciar");
+		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnNewButton.setBounds(142, 205, 97, 25);
-		layeredPane.add(btnNewButton);
+		loginButton.setBounds(142, 205, 97, 25);
+		layeredPane.add(loginButton);
 		this.setVisible(true);
 	}
+	
+	public JTextField getUser() {
+		return user;
+	}
+
+	public void setUser(JTextField user) {
+		this.user = user;
+	}
+
+	public JTextField getPassword() {
+		return password;
+	}
+
+	public void setPassword(JTextField password) {
+		this.password = password;
+	}
+
+	public JButton getBtnNewButton() {
+		return loginButton;
+	}
+
+	public void setBtnNewButton(JButton btnNewButton) {
+		this.loginButton = btnNewButton;
+	}
+
 }
