@@ -2,12 +2,8 @@ package ftp;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -44,18 +40,19 @@ public class TransferFTP {
 		
 		//File fileFromPicker = new File(directory, fileName);
 		File fileFromPicker = new File("C:\\peval1");
-
-		FTPClient client = new FTPClient();
-
-		String sFTP = "localhost";
-		int port = 21;
-		String sUser = user.geteMail();
-		String sPassword = user.getPassword();
-
+		
 		try {
-			client.connect(sFTP, port);
+		//FTPClient client = new FTPClient();
+		ClientFTP client = new ClientFTP(this.user);
+
+		//String sFTP = "localhost";
+		//int port = 21;
+		//String sUser = user.geteMail();
+		//String sPassword = user.getPassword();
+		
+			client.connect();
 			if (client.isConnected()) {
-				boolean login = client.login(sUser, sPassword);
+				boolean login = client.login();
 				if (login) {
 					client.enterLocalPassiveMode();
 					client.setFileType(FTP.BINARY_FILE_TYPE);
