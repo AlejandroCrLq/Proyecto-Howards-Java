@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
@@ -19,7 +20,7 @@ public class WriteMessage extends JFrame {
 	private JPanel contentPane;
 	private JTextField textFor;
 	private JTextField textSubject;
-	private JTextField textMessage;
+	private JTextArea textMessage;
 
 	/**
 	 * Launch the application.
@@ -79,7 +80,7 @@ public class WriteMessage extends JFrame {
 		layeredPane.add(textSubject);
 		textSubject.setColumns(10);
 		
-		textMessage = new JTextField();
+		textMessage = new JTextArea();
 		textMessage.setBounds(140, 125, 600, 200);
 		layeredPane.add(textMessage);
 		textMessage.setColumns(10);
@@ -111,11 +112,11 @@ public class WriteMessage extends JFrame {
 		this.textSubject = textSubject;
 	}
 
-	public JTextField getTextMessage() {
+	public JTextArea getTextMessage() {
 		return textMessage;
 	}
 
-	public void setTextMessage(JTextField textMessage) {
+	public void setTextMessage(JTextArea textMessage) {
 		this.textMessage = textMessage;
 	}
 
