@@ -20,8 +20,8 @@ import interfaces.MailWindow;
 public class MailInbox {
 
 	private static String mailHost = "pop.gmail.com";
-	private static String mailUser = "jchicaramirez.sanjose@alumnado.fundacionloyola.net";
-	private static String mailPassword = "26170102";
+	private static String mailUser = "acorralluque.sanjose@alumnado.fundacionloyola.net";
+	private static String mailPassword = "92405668";
 	private static String mailPort = "995";
 	private Message[] messages;
 
