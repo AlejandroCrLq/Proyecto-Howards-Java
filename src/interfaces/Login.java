@@ -49,15 +49,15 @@ public class Login extends JFrame {
 		lblPassword.setBounds(68, 122, 97, 19);
 		layeredPane.add(lblPassword);
 		
-		user = new JTextField();
-		user.setBounds(206, 68, 116, 22);
-		layeredPane.add(user);
-		user.setColumns(10);
+		textUser = new JTextField();
+		textUser.setBounds(206, 68, 116, 22);
+		layeredPane.add(textUser);
+		textUser.setColumns(10);
 		
-		password = new JPasswordField();
-		password.setBounds(206, 122, 116, 22);
-		layeredPane.add(password);
-		password.setColumns(10);
+		textPassword = new JPasswordField();
+		textPassword.setBounds(206, 122, 116, 22);
+		layeredPane.add(textPassword);
+		textPassword.setColumns(10);
 		
 		loginButton = new JButton("Iniciar");
 		loginButton.addActionListener(new ActionListener() {
@@ -70,19 +70,19 @@ public class Login extends JFrame {
 	}
 	
 	public JTextField getUser() {
-		return user;
+		return textUser;
 	}
 
 	public void setUser(JTextField user) {
-		this.user = user;
+		this.textUser = user;
 	}
 
 	public JTextField getPassword() {
-		return password;
+		return textPassword;
 	}
 
 	public void setPassword(JTextField password) {
-		this.password = password;
+		this.textPassword = password;
 	}
 
 	public JButton getBtnNewButton() {
