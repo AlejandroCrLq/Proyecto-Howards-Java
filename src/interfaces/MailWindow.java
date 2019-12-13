@@ -2,17 +2,15 @@ package interfaces;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.util.Vector;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JButton;
-import javax.swing.JList;
 
 public class MailWindow extends JFrame {
 
@@ -65,6 +63,10 @@ public class MailWindow extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		listUserMails = new JList();
+		Vector vectorDeEjemploHOLAJUANJO = new Vector();
+		vectorDeEjemploHOLAJUANJO.add("Mail de Jorge: Hola Juanjo");
+		vectorDeEjemploHOLAJUANJO.add("Mail de Jorge: Adios Juanjo");
+		listUserMails.setListData(vectorDeEjemploHOLAJUANJO);
 		contentPane.add(listUserMails, BorderLayout.CENTER);
 	}
 
