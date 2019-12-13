@@ -34,6 +34,10 @@ public class ListenerChangeDirectory_LoadFiles implements MouseListener{
 		}else if(e.getClickCount()==2) {
 			if(file.isDirectory()) {
 				actualDirectory.setText(file.getAbsolutePath());
+				
+				//Aquí iría el listado de los movimientos de esta carpeta cogiendolo de la base de datos
+				
+				
 				FtpController.recargarDirectorio();
 			}else {
 				JOptionPane.showMessageDialog(FtpController.getFtpWindow(), "El archivo seleccionado no es un directorio","Error", JOptionPane.ERROR_MESSAGE);
