@@ -16,25 +16,6 @@ public class TransferFTP {
 
 	private Users user;
 
-	public static void main(String[] args) {
-
-		/*
-		 * String password = "1234567890"; MessageDigest digest; byte[] hash = null; try
-		 * { digest = MessageDigest.getInstance("SHA-256"); hash =
-		 * digest.digest(password.getBytes(StandardCharsets.UTF_8)); } catch
-		 * (NoSuchAlgorithmException e) {
-		 * System.out.println("Error en la encriptación de la contraseña."); }
-		 */
-
-		Users user = new Users();
-		user.seteMail("rbarranco");
-		user.setUserName("Rafael Barranco");
-		user.setPassword("1234567890");
-		user.setTeacher(false);
-		TransferFTP t = new TransferFTP(user);
-
-	}
-
 	public TransferFTP(Users user) {
 		this.user = user;
 
