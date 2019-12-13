@@ -19,6 +19,7 @@ public class ListenerChangeDirectory_LoadFiles implements MouseListener{
 	private JList fileList;
 	private FTPController FtpController;
 	private JList movementsList;
+	
 	public ListenerChangeDirectory_LoadFiles(JLabel actualDirectory,JList fileList,FTPController FtpController,JList movementsList) {
 		this.actualDirectory=actualDirectory;
 		this.fileList = fileList;
