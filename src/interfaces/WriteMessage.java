@@ -31,6 +31,7 @@ public class WriteMessage extends JFrame {
 					WriteMessage frame = new WriteMessage();
 					frame.setVisible(true);
 				} catch (Exception e) {
+					
 					e.printStackTrace();
 				}
 			}
