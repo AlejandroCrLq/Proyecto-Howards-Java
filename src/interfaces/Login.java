@@ -18,10 +18,10 @@ import java.awt.Font;
 
 public class Login extends JFrame {
 	private JPanel contentPane;
-	private JTextField user;
-	private JTextField password;
 	private JButton loginButton;
-
+	private JTextField textUser;
+	private JTextField textPassword;
+	
 	/**
 	 * Create the frame.
 	 */
@@ -39,15 +39,15 @@ public class Login extends JFrame {
 		JLayeredPane layeredPane = new JLayeredPane();
 		contentPane.add(layeredPane, BorderLayout.CENTER);
 		
-		JLabel lblUsuario = new JLabel("Usuario");
-		lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblUsuario.setBounds(71, 65, 75, 25);
-		layeredPane.add(lblUsuario);
+		JLabel lblUser = new JLabel("Usuario");
+		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblUser.setBounds(71, 65, 75, 25);
+		layeredPane.add(lblUser);
 		
-		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
-		lblContrasea.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblContrasea.setBounds(68, 122, 97, 19);
-		layeredPane.add(lblContrasea);
+		JLabel lblPassword = new JLabel("Contrase\u00F1a");
+		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblPassword.setBounds(68, 122, 97, 19);
+		layeredPane.add(lblPassword);
 		
 		user = new JTextField();
 		user.setBounds(206, 68, 116, 22);

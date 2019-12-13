@@ -11,15 +11,14 @@ import javax.swing.ImageIcon;
 
 public class Splash extends JFrame implements Runnable {
 
-	Thread splash= new Thread();
+	Thread splash = new Thread();
 	private JPanel contentPane;
-	
-	
+
 	/**
 	 * Create the frame.
 	 */
 	public Splash() {
-		//frame = new Splash();
+		// frame = new Splash();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 587, 668);
 		contentPane = new JPanel();
@@ -35,7 +34,6 @@ public class Splash extends JFrame implements Runnable {
 	@Override
 	public void run() {
 		try {
-
 			this.setLocationRelativeTo(null);
 			this.setVisible(true);
 			splash.sleep(4000);
@@ -47,7 +45,5 @@ public class Splash extends JFrame implements Runnable {
 		}
 
 	}
-
-
 
 }
