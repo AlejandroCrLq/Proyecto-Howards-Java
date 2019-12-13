@@ -64,6 +64,11 @@ public class MailInbox {
 
 	}
 	
+	/**
+	 * This grab the JList and add an Double Click Action listener in order to read the clicked email.
+	 * @param mailInbox
+	 * @throws MessagingException
+	 */
 	public void addListener(JList mailInbox) throws MessagingException {
 		mailInbox.addMouseListener(new MouseAdapter() {
 		    public void mouseClicked(MouseEvent evt) {
