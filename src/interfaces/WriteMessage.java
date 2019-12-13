@@ -80,10 +80,12 @@ public class WriteMessage extends JFrame {
 		layeredPane.add(textSubject);
 		textSubject.setColumns(10);
 		
-		textMessage = new JTextArea();
+		textMessage = new JTextArea(30,80);
 		textMessage.setBounds(140, 125, 600, 200);
 		layeredPane.add(textMessage);
 		textMessage.setColumns(10);
+		textMessage.setLineWrap(true);
+		textMessage.setWrapStyleWord(true);
 		
 		JButton btnSend = new JButton("Enviar");
 		btnSend.addActionListener(new ActionListener() {
