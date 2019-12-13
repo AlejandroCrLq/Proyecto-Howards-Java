@@ -27,7 +27,7 @@ public class FTPWindow extends JFrame {
 	private JButton btnBorrar;
 	private JButton btnSubirCarpeta;
 	private JList listFileMovements;
-	private JLabel lblPath;
+	private JLabel lblDirectory;
 	private JList listFiles;
 
 	/**
@@ -73,8 +73,8 @@ public class FTPWindow extends JFrame {
 		contentPane.add(panel, BorderLayout.WEST);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		lblPath = new JLabel();
-		panel.add(lblPath, BorderLayout.NORTH);
+		lblDirectory = new JLabel();
+		panel.add(lblDirectory, BorderLayout.NORTH);
 		
 		listFiles = new JList();
 		panel.add(listFiles, BorderLayout.CENTER);
@@ -140,8 +140,8 @@ public class FTPWindow extends JFrame {
 	public JList getListFileMovements() {
 		return listFileMovements;
 	}
-	public JLabel getLblPath() {
-		return lblPath;
+	public JLabel getLblDirectory() {
+		return lblDirectory;
 	}
 	public JList getListFiles() {
 		return listFiles;
