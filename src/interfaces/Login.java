@@ -67,4 +67,20 @@ public class Login extends JFrame {
 		layeredPane.add(btnStart);
 		this.setVisible(true);
 	}
+
+	public JTextField getTextUser() {
+		return textUser;
+	}
+
+	public void setTextUser(JTextField textUser) {
+		this.textUser = textUser;
+	}
+
+	public JTextField getTextPassword() {
+		return textPassword;
+	}
+
+	public void setTextPassword(JTextField textPassword) {
+		this.textPassword = textPassword;
+	}
 }

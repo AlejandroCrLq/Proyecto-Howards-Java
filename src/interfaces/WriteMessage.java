@@ -95,4 +95,28 @@ public class WriteMessage extends JFrame {
 
 	}
 
+	public JTextField getTextFor() {
+		return textFor;
+	}
+
+	public void setTextFor(JTextField textFor) {
+		this.textFor = textFor;
+	}
+
+	public JTextField getTextSubject() {
+		return textSubject;
+	}
+
+	public void setTextSubject(JTextField textSubject) {
+		this.textSubject = textSubject;
+	}
+
+	public JTextField getTextMessage() {
+		return textMessage;
+	}
+
+	public void setTextMessage(JTextField textMessage) {
+		this.textMessage = textMessage;
+	}
+
 }
