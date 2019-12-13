@@ -2,6 +2,7 @@ package mail;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -13,13 +14,14 @@ import javax.mail.Session;
 import javax.mail.Store;
 import javax.swing.JList;
 
+import interfaces.MailRead;
 import interfaces.MailWindow;
 
 public class MailInbox {
 
 	private static String mailHost = "pop.gmail.com";
-	private static String mailUser = "acorralluque.sanjose@alumnado.fundacionloyola.net";
-	private static String mailPassword = "92405668";
+	private static String mailUser = "jchicaramirez.sanjose@alumnado.fundacionloyola.net";
+	private static String mailPassword = "26170102";
 	private static String mailPort = "995";
 	private Message[] messages;
 
@@ -70,7 +72,13 @@ public class MailInbox {
 
 		            // Double-click detected
 		            int index = list.locationToIndex(evt.getPoint());
-		            mailInbox.remove(index);
+		            try {
+						MailRead mailRead = new MailRead(messages[index]);
+						mailRead.setVisible(true);
+					} catch (MessagingException | IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 		        } else if (evt.getClickCount() == 3) {
 
 		            // Triple-click detected
