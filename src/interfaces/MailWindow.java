@@ -6,11 +6,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import mail.MailInbox;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JCheckBoxMenuItem;
+import javax.mail.MessagingException;
 import javax.swing.JButton;
 import javax.swing.JList;
 
@@ -21,6 +25,7 @@ public class MailWindow extends JFrame {
 	private JButton btnOpenFTP;
 	private JButton btnWriteMail;
 	private JList listUserMails;
+	private MailInbox inbox;
 
 	/**
 	 * Launch the application.
@@ -40,8 +45,9 @@ public class MailWindow extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws MessagingException 
 	 */
-	public MailWindow() {
+	public MailWindow() throws MessagingException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 600);
 		
@@ -66,6 +72,15 @@ public class MailWindow extends JFrame {
 		
 		listUserMails = new JList();
 		contentPane.add(listUserMails, BorderLayout.CENTER);
+		
+		MailInbox mailTools = new MailInbox();
+		try {
+			mailTools.fillInbox(listUserMails);
+			mailTools.addListener(listUserMails);
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public JButton getBtnAbout() {

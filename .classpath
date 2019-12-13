@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="D:/Descargas/commons-net-3.6-bin/commons-net-3.6/commons-net-3.6.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+=======
+<<<<<<< HEAD
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-12">
+=======
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+>>>>>>> branch 'master' of https://github.com/AlejandroCrLq/Proyecto-Howards-Java.git
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+<<<<<<< HEAD
+	<classpathentry kind="lib" path="C:/disciplinar/javax.mail.jar"/>
+	<classpathentry kind="lib" path="C:/disciplinar/javax.activation-1.1.0.v201105071233.jar"/>
+	<classpathentry kind="lib" path="C:/disciplinar/jsoup-1.12.1.jar"/>
+=======
+	<classpathentry kind="lib" path="C:/Users/Alexs/Downloads/commons-net-3.6-bin/commons-net-3.6/commons-net-3.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alexs/Downloads/javax.activation-1.1.0.v201105071233.jar/javax.activation-1.1.0.v201105071233.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alexs/Downloads/javax.mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alexs/Downloads/com.mysql.jdbc_5.1.5.jar"/>
+>>>>>>> branch 'master' of https://github.com/AlejandroCrLq/Proyecto-Howards-Java.git
+>>>>>>> branch 'master' of https://github.com/AlejandroCrLq/Proyecto-Howards-Java.git
 	<classpathentry kind="output" path="bin"/>
 </classpath>
