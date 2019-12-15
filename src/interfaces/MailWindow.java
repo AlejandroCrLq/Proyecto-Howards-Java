@@ -61,6 +61,11 @@ public class MailWindow extends JFrame {
 		menuBar.add(btnOpenFTP);
 		
 		btnWriteMail = new JButton("Redactar");
+		btnWriteMail.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				WriteMessage write = new WriteMessage();
+			}
+		});
 		menuBar.add(btnWriteMail);
 		
 		btnAbout = new JButton("Acerca de");

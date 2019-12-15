@@ -62,6 +62,12 @@ public class MailRead extends JFrame {
 
 		JButton btnResponder = new JButton("Responder");
 		btnResponder.setBounds(113, 266, 112, 23);
+		btnSend.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				WriteMessage write = new WriteMessage();
+				write.
+			}
+		});
 		contentPane.add(btnResponder);
 	}
 

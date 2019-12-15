@@ -5,7 +5,14 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -31,7 +38,7 @@ public class WriteMessage extends JFrame {
 					WriteMessage frame = new WriteMessage();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					
+
 					e.printStackTrace();
 				}
 			}
@@ -88,6 +95,45 @@ public class WriteMessage extends JFrame {
 		JButton btnSend = new JButton("Enviar");
 		btnSend.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				if((textMessage.getText().contentEquals("") || textSubject.getText().contentEquals("" ||textFor.getText().contentEquals("") )){
+					//Mensaje de error porque hay campos vacios
+				}
+				else {
+					
+				
+				String remitente = "jchicaramirez.sanjose@alumnado.fundacionloyola.net";  //HAY QUE COGER EL USER MAIL
+
+			    Properties props = System.getProperties();
+			    props.put("mail.smtp.host", "smtp.gmail.com");  //El servidor SMTP de Google
+			    props.put("mail.smtp.user", remitente);
+			    
+			    props.put("mail.smtp.clave", "26170102");    //HAY QUE COGER LA CONTRASEÑA DEL USUARIO
+			    
+			    
+			    props.put("mail.smtp.auth", "true");    //Usar autenticación mediante usuario y clave
+			    props.put("mail.smtp.starttls.enable", "true"); //Para conectar de manera segura al servidor SMTP
+			    props.put("mail.smtp.port", "587"); //El puerto SMTP seguro de Google
+
+			    Session session = Session.getDefaultInstance(props);
+			    MimeMessage message = new MimeMessage(session);
+
+			    try {
+			        message.setFrom(new InternetAddress(remitente, "Your Name"));
+			        message.addRecipients(Message.RecipientType.TO, textFor.getText());   //Se podrían añadir varios de la misma manera
+			        message.setSubject(textSubject.getText());
+			        message.setText(textMessage.getText());
+			        Transport transport = session.getTransport("smtp");
+			        
+			        transport.connect("smtp.gmail.com", remitente, "26170102" ); //HAY QUE COGER LA CONTRASEÑA DEL MODELO
+			        
+			        transport.sendMessage(message, message.getAllRecipients());
+			        transport.close();
+			    }
+			    catch (MessagingException me) {
+			        me.printStackTrace();   //Si se produce un error
+			    }
+			}
 			}
 		});
 		btnSend.setBounds(360, 335, 97, 25);
