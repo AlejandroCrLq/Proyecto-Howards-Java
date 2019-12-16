@@ -65,6 +65,7 @@ public class LoginController implements ActionListener {
 
 						JOptionPane.showMessageDialog(null, "Acceso concedido.", "CORRECTO",
 								JOptionPane.INFORMATION_MESSAGE);
+						new MainMenuController(user);
 					} else {
 						throw new Exception();
 					}
