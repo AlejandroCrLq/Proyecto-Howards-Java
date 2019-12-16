@@ -4,16 +4,10 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-<<<<<<< HEAD
 import java.io.FileOutputStream;
-=======
->>>>>>> refs/remotes/origin/master
 import java.io.IOException;
 import java.io.InputStream;
-<<<<<<< HEAD
 import java.io.OutputStream;
-=======
->>>>>>> refs/remotes/origin/master
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.net.ftp.FTP;
@@ -33,40 +27,32 @@ public class TransferFTP {
 		String fileName = "gollum.jpg";
 		String directory = "C:\\Users\\rafae\\OneDrive\\Documentos\\Proyecto Multidisciplinar\\";
 		String remoteFolder = "..";
-<<<<<<< HEAD
 
 		// File fileFromPicker = new File(directory, fileName);
 		String fileFromPicker = "peval1";
 		String local = "C:\\peval3\\";
 
-		//TransferFTP t = new TransferFTP(user, fileFromPicker, remoteFolder); // Carga
-		 TransferFTP t = new TransferFTP(user, local, fileFromPicker); // Descarga
+		// TransferFTP t = new TransferFTP(user, fileFromPicker, remoteFolder); // Carga
+		TransferFTP t = new TransferFTP(user, local, fileFromPicker); // Descarga
 
 	}
 
 	public TransferFTP(Users user, String local, String remote) {
 		this.user = user;
 
-=======
-		
-		//File fileFromPicker = new File(directory, fileName);
+		// File fileFromPicker = new File(directory, fileName);
 		File fileFromPicker = new File("C:\\peval1");
-		
->>>>>>> refs/remotes/origin/master
+
 		try {
-<<<<<<< HEAD
+
+			// FTPClient client = new FTPClient();
 			ClientFTP client = new ClientFTP(this.user);
 
-=======
-		//FTPClient client = new FTPClient();
-		ClientFTP client = new ClientFTP(this.user);
+			// String sFTP = "localhost";
+			// int port = 21;
+			// String sUser = user.geteMail();
+			// String sPassword = user.getPassword();
 
-		//String sFTP = "localhost";
-		//int port = 21;
-		//String sUser = user.geteMail();
-		//String sPassword = user.getPassword();
-		
->>>>>>> refs/remotes/origin/master
 			client.connect();
 			if (client.isConnected()) {
 				boolean login = client.login();
@@ -108,7 +94,8 @@ public class TransferFTP {
 				if (existingFiles.length > 0) {
 					int i = 1;
 					do {
-						remotePath = remoteFile + "\\" + FilenameUtils.getBaseName(file.getName()) + " (" + i + ")." + FilenameUtils.getExtension(file.getName());
+						remotePath = remoteFile + "\\" + FilenameUtils.getBaseName(file.getName()) + " (" + i + ")."
+								+ FilenameUtils.getExtension(file.getName());
 						existingFiles = client.listFiles(remotePath);
 					} while (existingFiles.length > 0);
 				}
@@ -137,7 +124,8 @@ public class TransferFTP {
 				if (downloadFile.exists()) {
 					int i = 1;
 					while (downloadFile.exists()) {
-						downloadFile = new File(localFile, FilenameUtils.getBaseName(f.getName()) + " (" + i + ")." + FilenameUtils.getExtension(f.getName()));
+						downloadFile = new File(localFile, FilenameUtils.getBaseName(f.getName()) + " (" + i + ")."
+								+ FilenameUtils.getExtension(f.getName()));
 						i++;
 					}
 				}

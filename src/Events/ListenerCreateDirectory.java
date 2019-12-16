@@ -16,9 +16,6 @@ public class ListenerCreateDirectory implements ActionListener{
 		this.actualDirectory = actualDirectory;
 	}
 
-
-
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
