@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-12">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Alexs/Downloads/commons-net-3.6-bin/commons-net-3.6/commons-net-3.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Alexs/Downloads/com.mysql.jdbc_5.1.5.jar"/>
+	<classpathentry kind="lib" path="C:/librerias/commons-net-3.6.jar"/>
+	<classpathentry kind="lib" path="C:/librerias/com.mysql.jdbc_5.1.5.jar"/>
+	<classpathentry kind="lib" path="C:/librerias/jsoup-1.12.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
