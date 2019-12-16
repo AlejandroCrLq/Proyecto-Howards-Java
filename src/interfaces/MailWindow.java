@@ -1,3 +1,12 @@
+/*
+ * Date:12/12/2019
+ * 
+ * Author:Jorge Rico Vivas
+ * 
+ * Description:Windows that allows to see the received emails and let us access to the write message and ftp windows
+ * 
+ * Version:1.0
+ */
 package interfaces;
 
 import java.awt.BorderLayout;
@@ -19,7 +28,6 @@ import javax.swing.JButton;
 import javax.swing.JList;
 
 public class MailWindow extends JFrame {
-
 	private JPanel contentPane;
 	private JButton btnAbout;
 	private JButton btnOpenFTP;
@@ -28,27 +36,15 @@ public class MailWindow extends JFrame {
 	private MailInbox inbox;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MailWindow frame = new MailWindow();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 * @throws MessagingException 
 	 */
+<<<<<<< HEAD
 	public MailWindow() throws MessagingException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+=======
+	public MailWindow() {
+>>>>>>> refs/heads/InterfazFran
 		setBounds(100, 100, 600, 600);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -72,6 +68,7 @@ public class MailWindow extends JFrame {
 		
 		listUserMails = new JList();
 		contentPane.add(listUserMails, BorderLayout.CENTER);
+<<<<<<< HEAD
 		
 		MailInbox mailTools = new MailInbox();
 		try {
@@ -81,8 +78,13 @@ public class MailWindow extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+=======
+		setVisible(true);
+>>>>>>> refs/heads/InterfazFran
 	}
-
+	/*
+	 * Getter and setter methods
+	 */
 	public JButton getBtnAbout() {
 		return btnAbout;
 	}

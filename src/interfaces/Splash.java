@@ -1,3 +1,12 @@
+/*
+ * Date: 12/12/2019
+ * 
+ * Author: Francisco Manuel Rodriguez Martin
+ * 
+ * Description: Class that make a splash screen at the start
+ * 
+ * Version:1.0
+ */
 package interfaces;
 
 import java.awt.BorderLayout;
@@ -38,7 +47,6 @@ public class Splash extends JFrame implements Runnable {
 			this.setVisible(true);
 			splash.sleep(4000);
 			this.dispose();
-			new Login();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

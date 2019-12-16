@@ -1,3 +1,12 @@
+/*
+ * Date:12/12/2019
+ * 
+ * Author:Jorge Rico Vivas
+ * 
+ * Description: 
+ * 
+ * Version: 1.0
+ */
 package interfaces;
 
 import java.awt.BorderLayout;
@@ -16,7 +25,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JTextField;
 
 public class FTPWindow extends JFrame {
-
+	
 	private JPanel contentPane;
 	private JTextField txtFileName;
 	private JButton btnOpenEmail;
@@ -29,22 +38,6 @@ public class FTPWindow extends JFrame {
 	private JList listFileMovements;
 	private JLabel lblDirectory;
 	private JList listFiles;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FTPWindow frame = new FTPWindow();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -111,8 +104,11 @@ public class FTPWindow extends JFrame {
 		
 		listFileMovements = new JList();
 		panel_1.add(listFileMovements, BorderLayout.CENTER);
+		setVisible(true);
 	}
-
+	/*
+	 * Getter and Setter methods
+	 */
 	public JButton getBtnOpenEmail() {
 		return btnOpenEmail;
 	}
