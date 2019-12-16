@@ -37,7 +37,6 @@ public class WriteMessage extends JFrame {
 	 */
 	public WriteMessage() {
 		setTitle("Universidad de Howards");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 420);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
