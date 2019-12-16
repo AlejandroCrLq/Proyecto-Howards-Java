@@ -20,12 +20,11 @@ import interfaces.MailWindow;
 public class MailInbox {
 
 	private static String mailHost = "pop.gmail.com";
-	private static String mailUser = "acorralluque.sanjose@alumnado.fundacionloyola.net";
-	private static String mailPassword = "92405668";
+	private static String mailUser = "acorralluque.sanjose@alumnado.fundacionloyola.net"; // COGERLOS DEL SITIO
+	private static String mailPassword = "92405668"; //
 	private static String mailPort = "995";
 	private Message[] messages;
 
-	
 	public MailInbox() throws MessagingException {
 		Properties props = new Properties();
 		props.put("mail.pop3.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
@@ -43,18 +42,20 @@ public class MailInbox {
 		inbox.open(Folder.READ_ONLY);
 
 		messages = inbox.getMessages();
+
 	}
 	// connect to my pop3 inbox
 
 	/**
 	 * This get the JList an then fills it with the messages from the connected user
+	 * 
 	 * @param mailInbox
 	 * @throws MessagingException
 	 */
 	public void fillInbox(JList mailInbox) throws MessagingException {
 
 		Vector messageVector = new Vector();
-		for(int i = messages.length-1;i>0;i--) {
+		for (int i = messages.length - 1; i > 0; i--) {
 			Vector messageMail = new Vector();
 			messageMail.add(messages[i].getFrom()[0] + ": ");
 			messageMail.add(messages[i].getSubject());
@@ -63,34 +64,43 @@ public class MailInbox {
 		mailInbox.setListData(messageVector);
 
 	}
-	
+
 	/**
-	 * This grab the JList and add an Double Click Action listener in order to read the clicked email.
+	 * This grab the JList and add an Double Click Action listener in order to read
+	 * the clicked email.
+	 * 
 	 * @param mailInbox
 	 * @throws MessagingException
 	 */
 	public void addListener(JList mailInbox) throws MessagingException {
 		mailInbox.addMouseListener(new MouseAdapter() {
-		    public void mouseClicked(MouseEvent evt) {
-		        JList list = (JList)evt.getSource();
-		        if (evt.getClickCount() == 2) {
+			public void mouseClicked(MouseEvent evt) {
+				JList list = (JList) evt.getSource();
+				if (evt.getClickCount() == 2) {
 
-		            // Double-click detected
-		            int index = list.locationToIndex(evt.getPoint());
-		            try {
-						MailRead mailRead = new MailRead(messages[messages.length-index-1]);
+					// Double-click detected
+					int index = list.locationToIndex(evt.getPoint());
+					try {
+						MailRead mailRead = new MailRead(messages[messages.length - index - 1]);
 						mailRead.setVisible(true);
 					} catch (MessagingException | IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-		        } else if (evt.getClickCount() == 3) {
-
-		            // Triple-click detected
-		            int index = list.locationToIndex(evt.getPoint());
-		        }
-		    }
+				}
+			}
 		});
+	}
+
+	public void refresh(MailWindow window) {
+		refreshMailThread refresh = null;
+		try {
+			refresh = new refreshMailThread(window);
+		} catch (MessagingException | InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		refresh.start();
 	}
 
 }

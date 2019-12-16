@@ -44,7 +44,6 @@ public class WriteMessage extends JFrame {
 					WriteMessage frame = new WriteMessage();
 					frame.setVisible(true);
 				} catch (Exception e) {
-
 					e.printStackTrace();
 				}
 			}
@@ -143,7 +142,12 @@ public class WriteMessage extends JFrame {
 			    	
 			        message.setFrom(new InternetAddress(from, "El jefe cabrón")); //ESTO HAY QUE COGERLO DEL MODELO
 			        
-			        message.addRecipients(Message.RecipientType.TO, textFor.getText());   //Se podrían añadir varios de la misma manera
+			        String recipients[] = textFor.getText().split(", ");
+			        
+			        for(String re:recipients ) {
+			        	 message.addRecipients(Message.RecipientType.TO, re);
+			        }
+			          //Se podrían añadir varios de la misma manera
 			        message.setSubject(textSubject.getText());
 			        message.setText(textMessage.getText());
 			        Transport transport = session.getTransport("smtp");

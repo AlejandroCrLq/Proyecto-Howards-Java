@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import mail.MailInbox;
+import mail.refreshMailThread;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -85,11 +86,13 @@ public class MailWindow extends JFrame {
 		try {
 			mailTools.fillInbox(listUserMails);
 			mailTools.addListener(listUserMails);
+			mailTools.refresh(this);
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
 
 	public JButton getBtnAbout() {
 		return btnAbout;
