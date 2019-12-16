@@ -78,7 +78,7 @@ public class MailInbox {
 		            // Double-click detected
 		            int index = list.locationToIndex(evt.getPoint());
 		            try {
-						MailRead mailRead = new MailRead(messages[index]);
+						MailRead mailRead = new MailRead(messages[messages.length-index-1]);
 						mailRead.setVisible(true);
 					} catch (MessagingException | IOException e) {
 						// TODO Auto-generated catch block
