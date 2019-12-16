@@ -22,7 +22,7 @@ public class Login extends JFrame {
 	private JTextField textPassword;
 	
 	/**
-	 * Create the frame.
+	 * Create the frame and fill it.
 	 */
 	public Login() {
 		setTitle("Universidad de Howards");
@@ -68,6 +68,9 @@ public class Login extends JFrame {
 		this.setVisible(true);
 	}
 
+	/*
+	 * Getter and setter methods
+	 */
 	public JTextField getTextUser() {
 		return textUser;
 	}

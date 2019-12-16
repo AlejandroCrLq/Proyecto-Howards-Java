@@ -12,27 +12,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 public class StartMenu extends JFrame {
-
+	
+	StartMenu frame = new StartMenu();
 	private JPanel contentPane;
+	JButton btnFTP;
+	JButton btnMail;
 	
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					StartMenu frame = new StartMenu();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
+	 * Create the frame and fill it.
 	 */
 	public StartMenu() {
 		setTitle("Universidad de Howards");
@@ -42,17 +29,26 @@ public class StartMenu extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		JButton btnMail = new JButton("Correo");
+		btnMail = new JButton("Correo");
 		btnMail.setBounds(50, 50, 150, 150);
 		layeredPane.add(btnMail);
-		JButton btnFTP = new JButton("FTP");		
+		btnFTP = new JButton("FTP");		
 		btnFTP.setBounds(235, 50, 150, 150);
 		layeredPane.add(btnFTP);
-		btnMail.addActionListener(null);
-		btnFTP.addActionListener(null);
 		this.add(layeredPane);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
+	}
+
+	/*
+	 * Getter methods
+	 */
+	public JButton getBtnFTP() {
+		return btnFTP;
+	}
+
+	public JButton getBtnMail() {
+		return btnMail;
 	}
 
 }

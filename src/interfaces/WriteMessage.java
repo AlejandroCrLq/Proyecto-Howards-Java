@@ -21,25 +21,10 @@ public class WriteMessage extends JFrame {
 	private JTextField textFor;
 	private JTextField textSubject;
 	private JTextArea textMessage;
+	WriteMessage frame = new WriteMessage();
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					WriteMessage frame = new WriteMessage();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
+	 * Create the frame and fill it.
 	 */
 	public WriteMessage() {
 		setTitle("Universidad de Howards");
@@ -97,7 +82,9 @@ public class WriteMessage extends JFrame {
 		this.setVisible(true);
 
 	}
-
+	/*
+	 * Getter and setter methods 
+	 */
 	public JTextField getTextFor() {
 		return textFor;
 	}

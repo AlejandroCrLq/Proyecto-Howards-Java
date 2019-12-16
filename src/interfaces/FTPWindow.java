@@ -16,7 +16,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JTextField;
 
 public class FTPWindow extends JFrame {
-
+	
+	FTPWindow frame = new FTPWindow();
 	private JPanel contentPane;
 	private JTextField txtFileName;
 	private JButton btnOpenEmail;
@@ -29,22 +30,6 @@ public class FTPWindow extends JFrame {
 	private JList listFileMovements;
 	private JLabel lblPath;
 	private JList listFiles;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FTPWindow frame = new FTPWindow();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -111,6 +96,7 @@ public class FTPWindow extends JFrame {
 		
 		listFileMovements = new JList();
 		panel_1.add(listFileMovements, BorderLayout.CENTER);
+		frame.setVisible(true);
 	}
 
 	public JButton getBtnOpenEmail() {
