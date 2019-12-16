@@ -1,3 +1,12 @@
+/*
+ * Date: 12/12/2019
+ * 
+ * Author: Francisco Manuel Rodriguez Martin
+ * 
+ * Description: Class that make a splash screen at the start
+ * 
+ * Version:1.0
+ */
 package interfaces;
 
 import java.awt.BorderLayout;
@@ -11,15 +20,14 @@ import javax.swing.ImageIcon;
 
 public class Splash extends JFrame implements Runnable {
 
-	Thread splash= new Thread();
+	Thread splash = new Thread();
 	private JPanel contentPane;
-	
-	
+
 	/**
 	 * Create the frame.
 	 */
 	public Splash() {
-		//frame = new Splash();
+		// frame = new Splash();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 587, 668);
 		contentPane = new JPanel();
@@ -35,19 +43,15 @@ public class Splash extends JFrame implements Runnable {
 	@Override
 	public void run() {
 		try {
-
 			this.setLocationRelativeTo(null);
 			this.setVisible(true);
 			splash.sleep(4000);
 			this.dispose();
-			new Login();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
-
-
 
 }

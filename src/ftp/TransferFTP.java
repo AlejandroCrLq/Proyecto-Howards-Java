@@ -4,10 +4,16 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+<<<<<<< HEAD
 import java.io.FileOutputStream;
+=======
+>>>>>>> refs/remotes/origin/master
 import java.io.IOException;
 import java.io.InputStream;
+<<<<<<< HEAD
 import java.io.OutputStream;
+=======
+>>>>>>> refs/remotes/origin/master
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.net.ftp.FTP;
@@ -27,6 +33,7 @@ public class TransferFTP {
 		String fileName = "gollum.jpg";
 		String directory = "C:\\Users\\rafae\\OneDrive\\Documentos\\Proyecto Multidisciplinar\\";
 		String remoteFolder = "..";
+<<<<<<< HEAD
 
 		// File fileFromPicker = new File(directory, fileName);
 		String fileFromPicker = "peval1";
@@ -40,9 +47,26 @@ public class TransferFTP {
 	public TransferFTP(Users user, String local, String remote) {
 		this.user = user;
 
+=======
+		
+		//File fileFromPicker = new File(directory, fileName);
+		File fileFromPicker = new File("C:\\peval1");
+		
+>>>>>>> refs/remotes/origin/master
 		try {
+<<<<<<< HEAD
 			ClientFTP client = new ClientFTP(this.user);
 
+=======
+		//FTPClient client = new FTPClient();
+		ClientFTP client = new ClientFTP(this.user);
+
+		//String sFTP = "localhost";
+		//int port = 21;
+		//String sUser = user.geteMail();
+		//String sPassword = user.getPassword();
+		
+>>>>>>> refs/remotes/origin/master
 			client.connect();
 			if (client.isConnected()) {
 				boolean login = client.login();

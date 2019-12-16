@@ -7,7 +7,8 @@ import java.util.Properties;
 
 public class ConfigurationData {
 	public enum Property {
-		ftpServer, ftpPort
+		ftpServer, 
+		ftpPort
 	}
 
 	private InputStream inputStream;

@@ -11,5 +11,10 @@
 	<classpathentry kind="lib" path="C:/librerias/com.mysql.jdbc_5.1.5.jar"/>
 	<classpathentry kind="lib" path="C:/librerias/jsoup-1.12.1.jar"/>
 	<classpathentry kind="lib" path="C:/librerias/commons-io-2.6.jar"/>
+	<classpathentry kind="lib" path="C:/librerias/com.mysql.jdbc_5.1.5.jar"/>
+	<classpathentry kind="lib" path="C:/librerias/commons-net-3.6.jar"/>
+	<classpathentry kind="lib" path="C:/librerias/javax.activation-1.1.0.v201105071233.jar"/>
+	<classpathentry kind="lib" path="C:/librerias/javax.mail.jar"/>
+	<classpathentry kind="lib" path="C:/librerias/jsoup-1.12.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

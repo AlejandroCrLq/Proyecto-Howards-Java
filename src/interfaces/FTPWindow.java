@@ -1,3 +1,12 @@
+/*
+ * Date:12/12/2019
+ * 
+ * Author:Jorge Rico Vivas
+ * 
+ * Description: 
+ * 
+ * Version: 1.0
+ */
 package interfaces;
 
 import java.awt.BorderLayout;
@@ -16,7 +25,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JTextField;
 
 public class FTPWindow extends JFrame {
-
+	
 	private JPanel contentPane;
 	private JTextField txtFileName;
 	private JButton btnOpenEmail;
@@ -27,24 +36,8 @@ public class FTPWindow extends JFrame {
 	private JButton btnBorrar;
 	private JButton btnSubirCarpeta;
 	private JList listFileMovements;
-	private JLabel lblPath;
+	private JLabel lblDirectory;
 	private JList listFiles;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FTPWindow frame = new FTPWindow();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -73,8 +66,8 @@ public class FTPWindow extends JFrame {
 		contentPane.add(panel, BorderLayout.WEST);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		lblPath = new JLabel();
-		panel.add(lblPath, BorderLayout.NORTH);
+		lblDirectory = new JLabel();
+		panel.add(lblDirectory, BorderLayout.NORTH);
 		
 		listFiles = new JList();
 		panel.add(listFiles, BorderLayout.CENTER);
@@ -111,8 +104,11 @@ public class FTPWindow extends JFrame {
 		
 		listFileMovements = new JList();
 		panel_1.add(listFileMovements, BorderLayout.CENTER);
+		setVisible(true);
 	}
-
+	/*
+	 * Getter and Setter methods
+	 */
 	public JButton getBtnOpenEmail() {
 		return btnOpenEmail;
 	}
@@ -140,8 +136,8 @@ public class FTPWindow extends JFrame {
 	public JList getListFileMovements() {
 		return listFileMovements;
 	}
-	public JLabel getLblPath() {
-		return lblPath;
+	public JLabel getLblDirectory() {
+		return lblDirectory;
 	}
 	public JList getListFiles() {
 		return listFiles;

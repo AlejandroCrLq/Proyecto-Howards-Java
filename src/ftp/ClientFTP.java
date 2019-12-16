@@ -28,5 +28,9 @@ public class ClientFTP extends FTPClient {
 	public boolean login() throws IOException {
 		return super.login(user.geteMail(), user.getPassword());
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> refs/remotes/origin/master
 }

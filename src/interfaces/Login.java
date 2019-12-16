@@ -1,3 +1,13 @@
+/*
+ * Date:12/12/2019
+ * 
+ * Author:Francisco Manuel Rodriguez Martin
+ * 
+ * Description: Class that create the login window where the user can introduce his information to have access to the rest 
+ * of the aplication
+ * 
+ * Version:1.0
+ */
 package interfaces;
 
 import java.awt.BorderLayout;
@@ -18,10 +28,10 @@ import java.awt.Font;
 
 public class Login extends JFrame {
 	private JPanel contentPane;
-	private JTextField user;
-	private JTextField password;
 	private JButton loginButton;
-
+	private JTextField textUser;
+	private JTextField textPassword;
+	
 	/**
 	 * Create the frame.
 	 */
@@ -39,25 +49,25 @@ public class Login extends JFrame {
 		JLayeredPane layeredPane = new JLayeredPane();
 		contentPane.add(layeredPane, BorderLayout.CENTER);
 		
-		JLabel lblUsuario = new JLabel("Usuario");
-		lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblUsuario.setBounds(71, 65, 75, 25);
-		layeredPane.add(lblUsuario);
+		JLabel lblUser = new JLabel("Usuario");
+		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblUser.setBounds(71, 65, 75, 25);
+		layeredPane.add(lblUser);
 		
-		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
-		lblContrasea.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblContrasea.setBounds(68, 122, 97, 19);
-		layeredPane.add(lblContrasea);
+		JLabel lblPassword = new JLabel("Contrase\u00F1a");
+		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblPassword.setBounds(68, 122, 97, 19);
+		layeredPane.add(lblPassword);
 		
-		user = new JTextField();
-		user.setBounds(206, 68, 116, 22);
-		layeredPane.add(user);
-		user.setColumns(10);
+		textUser = new JTextField();
+		textUser.setBounds(206, 68, 116, 22);
+		layeredPane.add(textUser);
+		textUser.setColumns(10);
 		
-		password = new JPasswordField();
-		password.setBounds(206, 122, 116, 22);
-		layeredPane.add(password);
-		password.setColumns(10);
+		textPassword = new JPasswordField();
+		textPassword.setBounds(206, 122, 116, 22);
+		layeredPane.add(textPassword);
+		textPassword.setColumns(10);
 		
 		loginButton = new JButton("Iniciar");
 		loginButton.addActionListener(new ActionListener() {
@@ -70,19 +80,19 @@ public class Login extends JFrame {
 	}
 	
 	public JTextField getUser() {
-		return user;
+		return textUser;
 	}
 
 	public void setUser(JTextField user) {
-		this.user = user;
+		this.textUser = user;
 	}
 
 	public JTextField getPassword() {
-		return password;
+		return textPassword;
 	}
 
 	public void setPassword(JTextField password) {
-		this.password = password;
+		this.textPassword = password;
 	}
 
 	public JButton getBtnNewButton() {
