@@ -22,7 +22,7 @@ public class ListenerNameChange implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		File fileToChange = new File(path.getText());
-		File newName = new File(fileName.getText());
+		File newName = new File(fileName.getText().trim());
 		if (!newName.equals("")) {
 			if (fileToChange.renameTo(newName)) {
 				path.setText(newName.getName());
