@@ -58,5 +58,4 @@ public class StartMenu extends JFrame {
 	public JButton getBtnMail() {
 		return btnMail;
 	}
-
 }

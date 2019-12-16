@@ -1,11 +1,19 @@
 package ftp;
 
 import java.io.File;
+import java.io.IOException;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Calendar;
+
+import javax.swing.JOptionPane;
 
 import Events.ListenerAbout;
 import Events.ListenerDeleteFiles;
 import Events.ListenerNameChange;
 import Events.ListenerOpenMail;
+import general.ConnectionToDatabase;
 import interfaces.FTPWindow;
 import interfaces.MailWindow;
 
@@ -17,7 +25,6 @@ public class FTPController {
 		this.ftpWindow = ftpWindow;
 		this.mailWindow=mailWindow;
 		this.user=user;
-		AsignarEventos();
 	}
 	public void AsignarEventos() {
 		ftpWindow.getBtnAbout().addActionListener(new ListenerAbout(this));
@@ -29,10 +36,23 @@ public class FTPController {
 	}
 	public void recargarDirectorio() {
 		File file = new File(ftpWindow.getLblFilePath().getText());
-		File[] files = file.listFiles();
+		File[] files = file.listFiles();		
 		ftpWindow.getListFiles().setListData(files); //Comprobar que funcione, no estamos seguros. Recordar a Yorch.
 		ftpWindow.getListFiles().repaint();
 		ftpWindow.getListFileMovements().removeAll();
+	}
+	
+	public void registrarMovimiento(String accion,String usuario,String rutaArchivo) {
+		ConnectionToDatabase conexion = new ConnectionToDatabase();
+	    Statement sentencia= conexion.getSentencia();
+	    try {
+			Calendar fecha = Calendar.getInstance();
+			sentencia.executeQuery("insert into movements values('"+accion+"',"+"'"+fecha.get(Calendar.DATE)+"'/"+fecha.get(Calendar.MONTH)+"/"+fecha.get(Calendar.YEAR)+"','"
+					+ usuario+"','"+rutaArchivo+"')");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public FTPWindow getFtpWindow() {
 		return ftpWindow;

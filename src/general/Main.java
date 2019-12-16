@@ -11,6 +11,5 @@ public class Main {
 		ConnectionToDatabase connect = new ConnectionToDatabase();
 		LoginController control = new LoginController(log, connect);
 		control.addListeners();
-
 	}
 }

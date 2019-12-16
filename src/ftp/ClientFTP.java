@@ -11,7 +11,7 @@ public class ClientFTP extends FTPClient {
 	private Users user;
 	private String sFTP;
 	private int port;
-
+	
 	public ClientFTP(Users user) throws IOException {
 		this.user = user;
 

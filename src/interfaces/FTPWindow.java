@@ -43,7 +43,6 @@ public class FTPWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public FTPWindow() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 600);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -103,8 +102,7 @@ public class FTPWindow extends JFrame {
 		panel_2.add(btnCrearCarpeta);
 		
 		listFileMovements = new JList();
-		panel_1.add(listFileMovements, BorderLayout.CENTER);
-		setVisible(true);
+		panel_1.add(listFileMovements, BorderLayout.CENTER);		
 	}
 	/*
 	 * Getter and Setter methods

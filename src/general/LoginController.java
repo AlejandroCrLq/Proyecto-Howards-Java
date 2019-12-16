@@ -65,6 +65,7 @@ public class LoginController implements ActionListener {
 
 						JOptionPane.showMessageDialog(null, "Acceso concedido.", "CORRECTO",
 								JOptionPane.INFORMATION_MESSAGE);
+						new MainMenuController(user);
 					} else {
 						throw new Exception();
 					}
@@ -72,7 +73,7 @@ public class LoginController implements ActionListener {
 					throw new Exception();
 				}
 			} catch (Exception a) {
-				JOptionPane.showMessageDialog(null, "Usuario o contraseña erroneo.", "ERROR",
+				JOptionPane.showMessageDialog(null, "Usuario o contraseña erróneo.", "ERROR",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
