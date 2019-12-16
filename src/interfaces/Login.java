@@ -1,3 +1,13 @@
+/*
+ * Date:12/12/2019
+ * 
+ * Author:Francisco Manuel Rodriguez Martin
+ * 
+ * Description: Class that create the login window where the user can introduce his information to have access to the rest 
+ * of the aplication
+ * 
+ * Version:1.0
+ */
 package interfaces;
 
 import java.awt.BorderLayout;

@@ -39,12 +39,7 @@ public class MailWindow extends JFrame {
 	 * Create the frame.
 	 * @throws MessagingException 
 	 */
-<<<<<<< HEAD
 	public MailWindow() throws MessagingException {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-=======
-	public MailWindow() {
->>>>>>> refs/heads/InterfazFran
 		setBounds(100, 100, 600, 600);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -68,7 +63,6 @@ public class MailWindow extends JFrame {
 		
 		listUserMails = new JList();
 		contentPane.add(listUserMails, BorderLayout.CENTER);
-<<<<<<< HEAD
 		
 		MailInbox mailTools = new MailInbox();
 		try {
@@ -78,9 +72,6 @@ public class MailWindow extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-=======
-		setVisible(true);
->>>>>>> refs/heads/InterfazFran
 	}
 	/*
 	 * Getter and setter methods
