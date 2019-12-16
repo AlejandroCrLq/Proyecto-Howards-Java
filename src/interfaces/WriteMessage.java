@@ -179,7 +179,6 @@ public class WriteMessage extends JFrame {
 			}
 			}
 		});
->>>>>>> refs/remotes/origin/sendMailBranch
 		btnSend.setBounds(360, 335, 97, 25);
 		layeredPane.add(btnSend);
 		setVisible(true);
