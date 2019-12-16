@@ -1,3 +1,12 @@
+/*
+ * Date:
+ * 
+ * Author:
+ * 
+ * Description:
+ * 
+ * 
+ */
 package interfaces;
 
 import java.awt.BorderLayout;
@@ -17,7 +26,6 @@ import javax.swing.JTextField;
 
 public class FTPWindow extends JFrame {
 	
-	FTPWindow frame = new FTPWindow();
 	private JPanel contentPane;
 	private JTextField txtFileName;
 	private JButton btnOpenEmail;
@@ -96,9 +104,11 @@ public class FTPWindow extends JFrame {
 		
 		listFileMovements = new JList();
 		panel_1.add(listFileMovements, BorderLayout.CENTER);
-		frame.setVisible(true);
+		setVisible(true);
 	}
-
+	/*
+	 * Getter and Setter methods
+	 */
 	public JButton getBtnOpenEmail() {
 		return btnOpenEmail;
 	}
