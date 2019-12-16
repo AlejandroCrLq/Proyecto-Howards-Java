@@ -21,7 +21,6 @@ public class WriteMessage extends JFrame {
 	private JTextField textFor;
 	private JTextField textSubject;
 	private JTextArea textMessage;
-	WriteMessage frame = new WriteMessage();
 
 	/**
 	 * Create the frame and fill it.
@@ -73,10 +72,6 @@ public class WriteMessage extends JFrame {
 		textMessage.setWrapStyleWord(true);
 		
 		JButton btnSend = new JButton("Enviar");
-		btnSend.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btnSend.setBounds(360, 335, 97, 25);
 		layeredPane.add(btnSend);
 		this.setVisible(true);

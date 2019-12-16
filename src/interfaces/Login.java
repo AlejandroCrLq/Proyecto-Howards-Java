@@ -59,10 +59,7 @@ public class Login extends JFrame {
 		textPassword.setColumns(10);
 		
 		JButton btnStart = new JButton("Iniciar");
-		btnStart.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+
 		btnStart.setBounds(142, 205, 97, 25);
 		layeredPane.add(btnStart);
 		this.setVisible(true);

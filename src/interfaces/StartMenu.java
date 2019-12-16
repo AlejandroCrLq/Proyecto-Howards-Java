@@ -13,10 +13,9 @@ import javax.swing.border.EmptyBorder;
 
 public class StartMenu extends JFrame {
 	
-	StartMenu frame = new StartMenu();
 	private JPanel contentPane;
-	JButton btnFTP;
-	JButton btnMail;
+	private JButton btnFTP;
+	private JButton btnMail;
 	
 	/**
 	 * Create the frame and fill it.

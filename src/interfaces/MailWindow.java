@@ -15,7 +15,6 @@ import javax.swing.JButton;
 import javax.swing.JList;
 
 public class MailWindow extends JFrame {
-	MailWindow frame = new MailWindow();
 	private JPanel contentPane;
 	private JButton btnAbout;
 	private JButton btnOpenFTP;
@@ -50,7 +49,7 @@ public class MailWindow extends JFrame {
 		
 		listUserMails = new JList();
 		contentPane.add(listUserMails, BorderLayout.CENTER);
-		frame.setVisible(true);
+		setVisible(true);
 	}
 	/*
 	 * Getter and setter methods
