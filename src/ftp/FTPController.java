@@ -20,7 +20,7 @@ public class FTPController {
 		AsignarEventos();
 	}
 	public void AsignarEventos() {
-		ftpWindow.getBtnAbout().addActionListener(new ListenerAbout());
+		ftpWindow.getBtnAbout().addActionListener(new ListenerAbout(this));
 		ftpWindow.getBtnBorrar().addActionListener(new ListenerDeleteFiles(ftpWindow.getLblFilePath(), this));
 		ftpWindow.getBtnOpenEmail().addActionListener(new ListenerOpenMail(mailWindow, ftpWindow));
 		ftpWindow.getTxtFileName().addActionListener(new ListenerNameChange(ftpWindow.getLblFilePath(), ftpWindow.getTxtFileName(), this));
