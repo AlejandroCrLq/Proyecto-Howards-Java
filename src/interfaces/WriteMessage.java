@@ -1,3 +1,12 @@
+/*
+ * Date:12/12/2019
+ * 
+ * Author:Francisco Manuel Rodriguez Martin
+ * 
+ * Description: Class that shows the window where we can write and send mails
+ * 
+ * Version:1.0
+ */
 package interfaces;
 
 import java.awt.BorderLayout;

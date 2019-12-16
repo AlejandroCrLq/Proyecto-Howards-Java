@@ -1,3 +1,12 @@
+/*
+ * Date:12/12/2019
+ * 
+ * Author:Francisco Manuel Rodriguez Martin
+ * 
+ * Description: Class that show up the star menu where we can decide to enter to either the FTP menu and the Mail screen
+ * 
+ * Version:1.0
+ */
 package interfaces;
 
 import java.awt.BorderLayout;

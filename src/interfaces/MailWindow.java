@@ -1,3 +1,12 @@
+/*
+ * Date:12/12/2019
+ * 
+ * Author:Jorge Rico Vivas
+ * 
+ * Description:Windows that allows to see the received emails and let us access to the write message and ftp windows
+ * 
+ * Version:1.0
+ */
 package interfaces;
 
 import java.awt.BorderLayout;
@@ -25,7 +34,6 @@ public class MailWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public MailWindow() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 600);
 		
 		JMenuBar menuBar = new JMenuBar();
