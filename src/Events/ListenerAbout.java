@@ -14,12 +14,12 @@ public class ListenerAbout implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JOptionPane.showMessageDialog(FtpController.getFtpWindow(), "Realizado por Grupo 2 formado por:\n"
+		JOptionPane.showMessageDialog(FtpController.getFtpWindow(), "Realizado por Grupo 2, formado por:\n"
 				+ "Alejandro Corral\n"
 				+ "Jorge Rico\n"
 				+ "Rafael Barranco\n"
-				+ "Juan José Chica\n"
-				+ "Francisco Manuel Rodríguez\n"
-				+ "Óscar Brenes");
+				+ "Juan JosÃ© Chica\n"
+				+ "Francisco Manuel RodrÃ­guez\n"
+				+ "Ã“scar Brenes");
 	}
 }

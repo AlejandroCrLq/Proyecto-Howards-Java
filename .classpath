@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-12">
@@ -8,6 +9,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/librerias/com.mysql.jdbc_5.1.5.jar"/>
+	<classpathentry kind="lib" path="C:/librerias/commons-io-2.6.jar"/>
 	<classpathentry kind="lib" path="C:/librerias/commons-net-3.6.jar"/>
 	<classpathentry kind="lib" path="C:/librerias/javax.activation-1.1.0.v201105071233.jar"/>
 	<classpathentry kind="lib" path="C:/librerias/javax.mail.jar"/>

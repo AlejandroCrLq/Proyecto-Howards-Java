@@ -34,6 +34,7 @@ public class FTPWindow extends JFrame {
 	private JButton btnAbout;
 	private JButton btnSubir;
 	private JButton btnBorrar;
+	private JButton btnRefrescar;
 	private JButton btnSubirCarpeta;
 	private JList listFileMovements;
 	private JLabel lblDirectory;
@@ -56,6 +57,8 @@ public class FTPWindow extends JFrame {
 		
 		btnAbout = new JButton("Acerca de");
 		menuBar.add(btnAbout);
+		btnRefrescar = new JButton("Refrescar");
+		menuBar.add(btnRefrescar);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

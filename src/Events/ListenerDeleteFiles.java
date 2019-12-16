@@ -29,7 +29,7 @@ public class ListenerDeleteFiles implements ActionListener {
 
 				// Hay que hacer el registro en la base de datos del movimiento fallido.
 			} else {
-				path.setText("Archivo borrado con éxito.");
+				path.setText("Archivo borrado con Ã©xito.");
 
 				// Hay que hacer el registro en la base de datos del borrado exitoso.
 			}

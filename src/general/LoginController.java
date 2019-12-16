@@ -11,8 +11,10 @@ import javax.swing.JOptionPane;
 
 import ftp.Users;
 import interfaces.Login;
+
 /**
  * Clase que controla el acceso del usuario.
+ * 
  * @author Alexs
  *
  */
@@ -25,16 +27,17 @@ public class LoginController implements ActionListener {
 		this.log = log;
 		this.connect = connect;
 	}
+
 	/**
-	 * Método que añade los listeners al botón del login.
+	 * Mï¿½todo que aï¿½ade los listeners al botï¿½n del login.
 	 */
 	public void addListeners() {
 		log.getBtnNewButton().addActionListener(this);
 	}
 
 	/**
-	 * Método que controla el acceso a la aplicación. En caso de error muestra un mensaje y en caso contrario
-	 * permite el acceso a la aplicación.
+	 * Mï¿½todo que controla el acceso a la aplicaciï¿½n. En caso de error muestra
+	 * un mensaje y en caso contrario permite el acceso a la aplicaciï¿½n.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -78,11 +81,13 @@ public class LoginController implements ActionListener {
 			}
 		}
 	}
-	
+
 	/**
-	 * Método que permite comprobar la contraseña en la base de datos y compararla con la escrita por el usuario.
-	 * @param password Contraseña escrita por el usuario en la ventana login.
-	 * @return Devuelve true si la contraseña es correcta y false si es erronea.
+	 * Mï¿½todo que permite comprobar la contraseï¿½a en la base de datos y
+	 * compararla con la escrita por el usuario.
+	 * 
+	 * @param password Contraseï¿½a escrita por el usuario en la ventana login.
+	 * @return Devuelve true si la contraseï¿½a es correcta y false si es erronea.
 	 */
 	public boolean decryptPassword(String password) {
 		MessageDigest digest;

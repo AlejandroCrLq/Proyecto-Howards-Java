@@ -45,7 +45,7 @@ public class Splash extends JFrame implements Runnable {
 		try {
 			this.setLocationRelativeTo(null);
 			this.setVisible(true);
-			splash.sleep(4000);
+			Thread.sleep(4000);
 			this.dispose();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
