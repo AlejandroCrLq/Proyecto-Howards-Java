@@ -11,12 +11,15 @@ package interfaces;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import mail.MailInbox;
+import mail.refreshMailThread;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -52,6 +55,12 @@ public class MailWindow extends JFrame {
 		menuBar.add(btnOpenFTP);
 		
 		btnWriteMail = new JButton("Redactar");
+		btnWriteMail.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				WriteMessage write = new WriteMessage();
+			}
+		});
 		menuBar.add(btnWriteMail);
 		
 		btnAbout = new JButton("Acerca de");
@@ -68,14 +77,13 @@ public class MailWindow extends JFrame {
 		try {
 			mailTools.fillInbox(listUserMails);
 			mailTools.addListener(listUserMails);
+			mailTools.refresh(this);
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	/*
-	 * Getter and setter methods
-	 */
+
 	public JButton getBtnAbout() {
 		return btnAbout;
 	}
