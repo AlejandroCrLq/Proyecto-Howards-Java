@@ -82,7 +82,7 @@ public class MailWindow extends JFrame {
 		try {
 			mailTools.fillInbox();
 			mailTools.addListener(listUserMails);
-			mailTools.refresh(this);
+			mailTools.refresh();
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

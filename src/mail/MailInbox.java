@@ -2,22 +2,20 @@ package mail;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Properties;
-import java.util.Vector;
 
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
 import interfaces.MailRead;
-import interfaces.MailWindow;
 
 public class MailInbox {
 
@@ -46,10 +44,8 @@ public class MailInbox {
 		inbox.open(Folder.READ_ONLY);
 		messageModel = new DefaultListModel<Message>();
 		mailInbox.setModel(messageModel);
-		for (Message message : inbox.getMessages()) {
-			messageModel.addElement(message);
-		}
 		mailInbox.setCellRenderer(new InboxCellRender());
+		fillInbox();
 	}
 	// connect to my pop3 inbox
 
@@ -65,9 +61,10 @@ public class MailInbox {
 		store.connect(mailHost, mailUser, mailPassword);
 		inbox = store.getFolder("Inbox");
 		inbox.open(Folder.READ_ONLY);
-		messageModel.removeAllElements();
-		for (Message message : inbox.getMessages()) {
-			messageModel.addElement(message);
+		for(Message message : inbox.getMessages()) {
+			if((messageModel.indexOf(message))==-1) {
+				messageModel.addElement(message);
+			}
 		}
 	}
 
@@ -98,15 +95,15 @@ public class MailInbox {
 		});
 	}
 
-	public void refresh(MailWindow window) {
+	public void refresh() {
 		refreshMailThread refresh = null;
 		try {
-			refresh = new refreshMailThread(window);
+			refresh = new refreshMailThread(this);
+			refresh.start();
 		} catch (MessagingException | InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		refresh.start();
 	}
 
 }
