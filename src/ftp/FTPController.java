@@ -1,7 +1,8 @@
 package ftp;
 
 import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.awt.event.FocusListener;import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
@@ -43,15 +44,16 @@ public class FTPController {
 		ftpWindow.getTxtFileName().addActionListener(
 				new ListenerNameChange(ftpWindow.getLblFilePath(), ftpWindow.getTxtFileName(), this));
 		ftpWindow.getBtnRefrescar().addActionListener(new ListenerFTPRefresh(this));
-		ActualizarListenerJList();
+
+		//ActualizarListenerJList();
 	}
 
-	public void ActualizarListenerJList() {
-		for(int i=0;i< ftpWindow.getListFiles().getModel().getSize();i++) {
-			System.out.println(ftpWindow.getListFiles().getModel().getElementAt(i).toString());
-			ftpWindow.getListFiles().getComponent(i).addMouseListener(new ListenerChangeDirectory_LoadFiles(ftpWindow.getLblDirectory(), ftpWindow.getListFiles(), this, ftpWindow.getListFileMovements()));
-		}
-	}
+//	public void ActualizarListenerJList() {
+//		for(int i=0;i< ftpWindow.getListFiles().getModel().getSize();i++) {
+//			System.out.println(ftpWindow.getListFiles().getModel().getElementAt(i).toString());
+//			ftpWindow.getListFiles().getComponent(i).addMouseListener(new ListenerChangeDirectory_LoadFiles(ftpWindow.getLblDirectory(), ftpWindow.getListFiles(), this, ftpWindow.getListFileMovements()));
+//		}
+//	}
 	
 	public void recargarDirectorio() {
 		FTPFile[] files;
@@ -61,9 +63,9 @@ public class FTPController {
 			for(int i=0;i<files.length;i++) {
 				model.addElement(files[i]);
 			}
-			ftpWindow.getListFiles().setModel(model);
-			ftpWindow.getListFiles().repaint();
-			ftpWindow.getLblDirectory().setText(cliente.printWorkingDirectory());
+//			ftpWindow.getListFiles().setModel(model);
+//			ftpWindow.getListFiles().repaint();
+//			ftpWindow.getLblDirectory().setText(cliente.printWorkingDirectory());
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
