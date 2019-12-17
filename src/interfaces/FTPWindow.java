@@ -143,4 +143,9 @@ public class FTPWindow extends JFrame {
 	public JList getListFiles() {
 		return listFiles;
 	}
+	public JButton getBtnRefrescar() {
+		return btnRefrescar;
+	}
+	
+	
 }

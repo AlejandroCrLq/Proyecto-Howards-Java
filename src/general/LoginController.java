@@ -96,7 +96,6 @@ public class LoginController implements ActionListener {
 			digest = MessageDigest.getInstance("SHA-256");
 			hash = digest.digest(log.getPassword().getText().getBytes(StandardCharsets.UTF_8));
 			String encoded = Base64.getEncoder().encodeToString(hash);
-			System.out.println(encoded);
 			if (!password.equals(encoded)) {
 				throw new NoSuchAlgorithmException();
 			}
