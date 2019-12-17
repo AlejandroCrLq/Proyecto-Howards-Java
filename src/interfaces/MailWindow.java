@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,7 +23,7 @@ public class MailWindow extends JFrame {
 	private JButton btnAbout;
 	private JButton btnOpenFTP;
 	private JButton btnWriteMail;
-	private JList listUserMails;
+	private JList<Message> listUserMails;
 	private MailInbox inbox;
 
 	/**
@@ -74,12 +75,12 @@ public class MailWindow extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		listUserMails = new JList();
+		listUserMails = new JList<Message>();
 		contentPane.add(listUserMails, BorderLayout.CENTER);
 		
-		MailInbox mailTools = new MailInbox();
+		MailInbox mailTools = new MailInbox(listUserMails);
 		try {
-			mailTools.fillInbox(listUserMails);
+			mailTools.fillInbox();
 			mailTools.addListener(listUserMails);
 			mailTools.refresh(this);
 		} catch (MessagingException e) {
@@ -98,7 +99,7 @@ public class MailWindow extends JFrame {
 	public JButton getBtnWriteMail() {
 		return btnWriteMail;
 	}
-	public JList getListUserMails() {
+	public JList<Message> getListUserMails() {
 		return listUserMails;
 	}
 }

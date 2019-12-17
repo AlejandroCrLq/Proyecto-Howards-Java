@@ -2,6 +2,7 @@ package mail;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Vector;
@@ -12,6 +13,7 @@ import javax.mail.MessagingException;
 import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Store;
+import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
 import interfaces.MailRead;
@@ -24,10 +26,10 @@ public class MailInbox {
 	private static String mailPassword = "92405668"; //
 	private static String mailPort = "995";
 	private static Folder inbox;
-	private Message[] messages;
+	private DefaultListModel<Message> messageModel;
 	private static Properties props;
 
-	public MailInbox() throws MessagingException {
+	public MailInbox(JList<Message> mailInbox) throws MessagingException {
 		props = new Properties();
 		props.put("mail.pop3.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 		props.put("mail.pop3.socketFactory.fallback", "false");
@@ -42,37 +44,31 @@ public class MailInbox {
 		store.connect(mailHost, mailUser, mailPassword);
 		inbox = store.getFolder("Inbox");
 		inbox.open(Folder.READ_ONLY);
-
-		messages = inbox.getMessages();
-
+		messageModel = new DefaultListModel<Message>();
+		mailInbox.setModel(messageModel);
+		for (Message message : inbox.getMessages()) {
+			messageModel.addElement(message);
+		}
+		mailInbox.setCellRenderer(new InboxCellRender());
 	}
 	// connect to my pop3 inbox
 
 	/**
-	 * This get the JList an then fills it with the messages from the connected user
+	 * Fills it with the messages from the connected user
 	 * 
-	 * @param mailInbox
 	 * @throws MessagingException
 	 */
-	public void fillInbox(JList mailInbox) throws MessagingException {
+	public void fillInbox() throws MessagingException {
 
 		Session session = Session.getDefaultInstance(props);
 		Store store = session.getStore("pop3");
 		store.connect(mailHost, mailUser, mailPassword);
 		inbox = store.getFolder("Inbox");
 		inbox.open(Folder.READ_ONLY);
-
-		messages = inbox.getMessages();
-
-		Vector messageVector = new Vector();
-		for (int i = messages.length - 1; i > 0; i--) {
-			Vector messageMail = new Vector();
-			messageMail.add(messages[i].getFrom()[0] + ": ");
-			messageMail.add(messages[i].getSubject());
-			messageVector.add(messageMail);
+		messageModel.removeAllElements();
+		for (Message message : inbox.getMessages()) {
+			messageModel.addElement(message);
 		}
-		mailInbox.setListData(messageVector);
-
 	}
 
 	/**
@@ -91,7 +87,7 @@ public class MailInbox {
 					// Double-click detected
 					int index = list.locationToIndex(evt.getPoint());
 					try {
-						MailRead mailRead = new MailRead(messages[messages.length - index - 1]);
+						MailRead mailRead = new MailRead(messageModel.elementAt(mailInbox.getSelectedIndex()));
 						mailRead.setVisible(true);
 					} catch (MessagingException | IOException e) {
 						// TODO Auto-generated catch block
