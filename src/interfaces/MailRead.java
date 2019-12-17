@@ -1,28 +1,26 @@
 package interfaces;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Vector;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Part;
+import javax.mail.internet.MimeBodyPart;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Part;
-import javax.swing.JButton;
 
 public class MailRead extends JFrame {
 
@@ -61,7 +59,7 @@ public class MailRead extends JFrame {
 		textField.setText(getText(message));
 		contentPane.add(textField);
 		textField.setColumns(15);
-
+		
 		JButton btnResponder = new JButton("Responder");
 		btnResponder.setBounds(113, 266, 112, 23);
 		btnResponder.addActionListener(new ActionListener() {
@@ -70,7 +68,11 @@ public class MailRead extends JFrame {
 				WriteMessage write = new WriteMessage();
 				try {
 					String from = message.getFrom()[0].toString();
+					try {
 					from = from.substring(from.indexOf("<")+1, from.indexOf(">"));
+					}catch (IndexOutOfBoundsException ex) {
+						//Normal from, without substring itself
+					}
 					write.getTextFor().setText(from);
 					
 					write.getTextSubject().setText("RE: "+ message.getSubject());
@@ -85,6 +87,31 @@ public class MailRead extends JFrame {
 			}
 		});
 		contentPane.add(btnResponder);
+		
+		if(message.getContentType().contains("multipart")) {
+			Vector<Part> filesInMessage = loadFiles((Multipart) message.getContent());
+			if(!filesInMessage.isEmpty()) {
+				JList<Part> listFiles = new JList<Part>(filesInMessage);
+				listFiles.setCellRenderer(new FilePartRender());
+				listFiles.addMouseListener(new DescargaArchivoListener(listFiles));
+				JScrollPane scroll = new JScrollPane(listFiles);
+				scroll.setBounds(47, 258, 503, 150);
+				contentPane.add(scroll);
+				btnResponder.setBounds(113, 423, 112, 23);
+				setBounds(100, 100, 630, 500);
+			} 
+		}
+	}
+
+	private Vector<Part> loadFiles(Multipart content) throws MessagingException {
+		Vector<Part> fileParts = new Vector<Part>();
+		for (int i = 0; i < content.getCount(); i++) {
+		    MimeBodyPart part = (MimeBodyPart) content.getBodyPart(i);
+		    if (Part.ATTACHMENT.equalsIgnoreCase(part.getDisposition())) {
+		    	fileParts.add(part);
+		    }
+		}
+		return fileParts;
 	}
 
 	private String getText(Part p) throws MessagingException, IOException {

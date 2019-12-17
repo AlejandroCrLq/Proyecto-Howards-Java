@@ -23,10 +23,12 @@ public class MailInbox {
 	private static String mailUser = "acorralluque.sanjose@alumnado.fundacionloyola.net"; // COGERLOS DEL SITIO
 	private static String mailPassword = "92405668"; //
 	private static String mailPort = "995";
+	private static Folder inbox;
 	private Message[] messages;
+	private static Properties props;
 
 	public MailInbox() throws MessagingException {
-		Properties props = new Properties();
+		props = new Properties();
 		props.put("mail.pop3.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 		props.put("mail.pop3.socketFactory.fallback", "false");
 		props.put("mail.pop3.socketFactory.port", mailPort);
@@ -38,7 +40,7 @@ public class MailInbox {
 		Session session = Session.getDefaultInstance(props);
 		Store store = session.getStore("pop3");
 		store.connect(mailHost, mailUser, mailPassword);
-		Folder inbox = store.getFolder("Inbox");
+		inbox = store.getFolder("Inbox");
 		inbox.open(Folder.READ_ONLY);
 
 		messages = inbox.getMessages();
@@ -53,6 +55,14 @@ public class MailInbox {
 	 * @throws MessagingException
 	 */
 	public void fillInbox(JList mailInbox) throws MessagingException {
+
+		Session session = Session.getDefaultInstance(props);
+		Store store = session.getStore("pop3");
+		store.connect(mailHost, mailUser, mailPassword);
+		inbox = store.getFolder("Inbox");
+		inbox.open(Folder.READ_ONLY);
+
+		messages = inbox.getMessages();
 
 		Vector messageVector = new Vector();
 		for (int i = messages.length - 1; i > 0; i--) {
