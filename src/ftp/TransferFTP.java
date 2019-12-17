@@ -18,6 +18,11 @@ public class TransferFTP {
 	private Users user;
 
 	public static void main(String[] args) {
+		/*
+		 * Todo esto es temporal para poder hacer las pruebas, el localfile y remotefile
+		 * debe llegar desde la ventana, y user debe estar en memoria. 
+		 */
+		
 		Users user = new Users();
 		user.seteMail("rbarranco");
 		user.setUserName("Rafael Barranco");
@@ -33,25 +38,15 @@ public class TransferFTP {
 		String local = "C:\\peval3\\";
 
 		// TransferFTP t = new TransferFTP(user, fileFromPicker, remoteFolder); // Carga
-		TransferFTP t = new TransferFTP(user, local, fileFromPicker); // Descarga
+		TransferFTP t = new TransferFTP(user, local, fileFromPicker, true); // Descarga
 
 	}
 
-	public TransferFTP(Users user, String local, String remote) {
-		this.user = user;
-
-		// File fileFromPicker = new File(directory, fileName);
-		File fileFromPicker = new File("C:\\peval1");
+	public TransferFTP(Users user, String local, String remote, boolean upload) {
 
 		try {
 
-			// FTPClient client = new FTPClient();
-			ClientFTP client = new ClientFTP(this.user);
-
-			// String sFTP = "localhost";
-			// int port = 21;
-			// String sUser = user.geteMail();
-			// String sPassword = user.getPassword();
+			ClientFTP client = new ClientFTP(user);
 
 			client.connect();
 			if (client.isConnected()) {
@@ -61,7 +56,11 @@ public class TransferFTP {
 					client.setFileType(FTP.BINARY_FILE_TYPE);
 					client.setControlEncoding("UTF-8");
 
-					downloadFiles(client, local, remote);
+					if (upload) {
+						loadFiles(client, local, remote);
+					} else {
+						downloadFiles(client, local, remote);
+					}
 
 					client.logout();
 					client.disconnect();
