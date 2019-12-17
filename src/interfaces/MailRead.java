@@ -2,6 +2,8 @@ package interfaces;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.JFrame;
@@ -62,6 +64,26 @@ public class MailRead extends JFrame {
 
 		JButton btnResponder = new JButton("Responder");
 		btnResponder.setBounds(113, 266, 112, 23);
+		btnResponder.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				WriteMessage write = new WriteMessage();
+				try {
+					String from = message.getFrom()[0].toString();
+					from = from.substring(from.indexOf("<")+1, from.indexOf(">"));
+					write.getTextFor().setText(from);
+					
+					write.getTextSubject().setText("RE: "+ message.getSubject());
+					
+					write.getTextFor().setEnabled(false);
+					write.getTextSubject().setEnabled(false);
+				} catch (MessagingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		contentPane.add(btnResponder);
 	}
 
