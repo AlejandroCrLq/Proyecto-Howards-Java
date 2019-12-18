@@ -12,6 +12,7 @@ package interfaces;
 import java.awt.BorderLayout;
 import java.awt.ComponentOrientation;
 import java.awt.EventQueue;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -81,49 +82,9 @@ public class FTPWindow extends JFrame {
 		lblDirectory = new JLabel();
 		panel.add(lblDirectory, BorderLayout.NORTH);
 
-		listFiles = cargarDatosJList(new File("C:\\"));
+		listFiles = null;  //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 		JScrollPane scrollPane = new JScrollPane(listFiles);
 		panel.add(scrollPane, BorderLayout.CENTER);
-
-		listFiles.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				if (e.getClickCount() == 2) {
-					File fichero = (File) listFiles.getModel().getElementAt(listFiles.getSelectedIndex());
-					if (fichero.isDirectory()) {
-						recargarDatosJList(listFiles, fichero);
-					}
-
-				}
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-		});
 
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.EAST);
@@ -159,31 +120,31 @@ public class FTPWindow extends JFrame {
 //		panel_1.add(listFileMovements, BorderLayout.CENTER);		
 	}
 
-	public static File[] combine(File[] listaFicheros1, File[] listaFicheros2) {
-		int length = listaFicheros1.length + listaFicheros2.length;
-		File[] result = new File[length];
-		System.arraycopy(listaFicheros1, 0, result, 0, listaFicheros1.length);
-		System.arraycopy(listaFicheros2, 0, result, listaFicheros1.length, listaFicheros2.length);
-		return result;
-	}
-
-	public static JList<File> cargarDatosJList(File archivoACargar) {
-		JList<File> list = new JList<File>();
-		recargarDatosJList(list, archivoACargar);
-		list.setCellRenderer(new RenderizacionDeFicheros());
-		return list;
-	}
-
-	public static void recargarDatosJList(JList<File> list, File directorioACargar) {
-		File directorioAnterior = directorioACargar.getParentFile();
-		File[] listFiles;
-		if (directorioAnterior != null) {
-			listFiles = combine(new File[] { directorioAnterior }, directorioACargar.listFiles());
-		} else {
-			listFiles = directorioACargar.listFiles();
-		}
-		list.setListData(listFiles);
-	}
+//	public static File[] combine(File[] listaFicheros1, File[] listaFicheros2) {
+//		int length = listaFicheros1.length + listaFicheros2.length;
+//		File[] result = new File[length];
+//		System.arraycopy(listaFicheros1, 0, result, 0, listaFicheros1.length);
+//		System.arraycopy(listaFicheros2, 0, result, listaFicheros1.length, listaFicheros2.length);
+//		return result;
+//	}
+//
+//	public static JList<File> cargarDatosJList(File archivoACargar) {
+//		JList<File> list = new JList<File>();
+//		recargarDatosJList(list, archivoACargar);
+//		list.setCellRenderer(new RenderizacionDeFicheros());
+//		return list;
+//	}
+//
+//	public static void recargarDatosJList(JList<File> list, File directorioACargar) {
+//		File directorioAnterior = directorioACargar.getParentFile();
+//		File[] listFiles;
+//		if (directorioAnterior != null) {
+//			listFiles = combine(new File[] { directorioAnterior }, directorioACargar.listFiles());
+//		} else {
+//			listFiles = directorioACargar.listFiles();
+//		}
+//		list.setListData(listFiles);
+//	}
 
 	/*
 	 * Getter and Setter methods

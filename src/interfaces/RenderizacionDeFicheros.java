@@ -12,18 +12,23 @@ public class RenderizacionDeFicheros extends DefaultListCellRenderer {
 	@Override
 	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
 			boolean cellHasFocus) {
-		
-		if(value instanceof File) {
+
+		if (isSelected) {
+			setBackground(list.getSelectionBackground());
+			setForeground(list.getSelectionForeground());
+		} else {
+			setBackground(list.getBackground());
+			setForeground(list.getForeground());
+		}
+
+		if (value instanceof File) {
 			File fichero = (File) value;
 			setText(fichero.getName());
 			setIcon(FileSystemView.getFileSystemView().getSystemIcon(fichero));
-            return this;
-		}
-		else {
+			return this;
+		} else {
 			return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 		}
 	}
 
-	
-	
 }

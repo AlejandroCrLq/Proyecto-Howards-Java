@@ -1,7 +1,11 @@
 package ftp;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;import java.awt.event.MouseEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +15,7 @@ import java.sql.Statement;
 import java.util.Calendar;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import org.apache.commons.net.ftp.FTPFile;
@@ -24,28 +29,92 @@ import Events.ListenerOpenMail;
 import general.ConnectionToDatabase;
 import interfaces.FTPWindow;
 import interfaces.MailWindow;
+import interfaces.RenderizacionDeFicheros;
 
 public class FTPController {
 	FTPWindow ftpWindow;
 	MailWindow mailWindow;
 	Users user;
 	ClientFTP cliente;
-	
+	File selected;
+
 	public FTPController(MailWindow mailWindow, FTPWindow ftpWindow, Users user) {
 		this.ftpWindow = ftpWindow;
 		this.mailWindow = mailWindow;
 		this.user = user;
+		JList listFiles = ftpWindow.getListFiles();
+		listFiles = cargarDatosJList(new File("C:\\"));
 	}
 
 	public void AsignarEventos() {
+
 		ftpWindow.getBtnAbout().addActionListener(new ListenerAbout(this));
-		ftpWindow.getBtnBorrar().addActionListener(new ListenerDeleteFiles(ftpWindow.getLblFilePath(), this));
+//		ftpWindow.getBtnBorrar().addActionListener(new ListenerDeleteFiles(ftpWindow.getLblFilePath(), this));
+		ftpWindow.getBtnBorrar().addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				File fileToDelete = selected;
+				if (!fileToDelete.isDirectory()) {
+					if (!fileToDelete.delete()) {
+						JOptionPane.showMessageDialog(ftpWindow, "Error al borrar archivo.", "Error",
+								JOptionPane.ERROR_MESSAGE);
+
+						// Hay que hacer el registro en la base de datos del movimiento fallido.
+					} else {
+//						path.setText("Archivo borrado con éxito.");
+
+						// Hay que hacer el registro en la base de datos del borrado exitoso.
+					}
+				} else {
+					recursiveDeletion(fileToDelete.getAbsolutePath());
+				}
+				recargarDirectorio();
+
+			}
+
+		});
+		
 		ftpWindow.getBtnOpenEmail().addActionListener(new ListenerOpenMail(mailWindow, ftpWindow));
 		ftpWindow.getTxtFileName().addActionListener(
 				new ListenerNameChange(ftpWindow.getLblFilePath(), ftpWindow.getTxtFileName(), this));
 		ftpWindow.getBtnRefrescar().addActionListener(new ListenerFTPRefresh(this));
 
-		//ActualizarListenerJList();
+		ftpWindow.getBtnCrearCarpeta().addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String path = selected.getParent();
+				File fichero = new File(path + "CarpetaPrueba"); //Seleccionar nombre del archicvo en  la caja de texto
+				fichero.mkdir();
+
+			}
+
+		});
+
+		ftpWindow.getListFiles().addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JList list = (JList) e.getSource();
+
+				selected = (File) ftpWindow.getListFiles().getModel()
+						.getElementAt(ftpWindow.getListFiles().getSelectedIndex());
+
+				if (e.getClickCount() == 2) {
+					File fichero = (File) ftpWindow.getListFiles().getModel()
+							.getElementAt(ftpWindow.getListFiles().getSelectedIndex());
+					selected = fichero;
+					if (fichero.isDirectory()) {
+						recargarDatosJList(ftpWindow.getListFiles(), fichero);
+						selected = null;
+					}
+				}
+			}
+
+		});
+
+		// ActualizarListenerJList();
 	}
 
 //	public void ActualizarListenerJList() {
@@ -54,32 +123,76 @@ public class FTPController {
 //			ftpWindow.getListFiles().getComponent(i).addMouseListener(new ListenerChangeDirectory_LoadFiles(ftpWindow.getLblDirectory(), ftpWindow.getListFiles(), this, ftpWindow.getListFileMovements()));
 //		}
 //	}
-	
+
 	public void recargarDirectorio() {
 		FTPFile[] files;
-		try {			
+		try {
 			files = cliente.listFiles();
-			DefaultListModel<FTPFile> model = new DefaultListModel<FTPFile>();			
-			for(int i=0;i<files.length;i++) {
+			DefaultListModel<FTPFile> model = new DefaultListModel<FTPFile>();
+			for (int i = 0; i < files.length; i++) {
 				model.addElement(files[i]);
 			}
 //			ftpWindow.getListFiles().setModel(model);
 //			ftpWindow.getListFiles().repaint();
 //			ftpWindow.getLblDirectory().setText(cliente.printWorkingDirectory());
-			
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
 	}
 
-	public void registrarMovimiento(String accion,String usuario,String rutaArchivo) {
+	public static File[] combine(File[] listaFicheros1, File[] listaFicheros2) {
+		int length = listaFicheros1.length + listaFicheros2.length;
+		File[] result = new File[length];
+		System.arraycopy(listaFicheros1, 0, result, 0, listaFicheros1.length);
+		System.arraycopy(listaFicheros2, 0, result, listaFicheros1.length, listaFicheros2.length);
+		return result;
+	}
+
+	public static JList<File> cargarDatosJList(File archivoACargar) {
+		JList<File> list = new JList<File>();
+		recargarDatosJList(list, archivoACargar);
+		list.setCellRenderer(new RenderizacionDeFicheros());
+		return list;
+	}
+
+	public static void recargarDatosJList(JList<File> list, File directorioACargar) {
+		File directorioAnterior = directorioACargar.getParentFile();
+		File[] listFiles;
+		if (directorioAnterior != null) {
+			listFiles = combine(new File[] { directorioAnterior }, directorioACargar.listFiles());
+		} else {
+			listFiles = directorioACargar.listFiles();
+		}
+		list.setListData(listFiles);
+	}
+
+	public void recursiveDeletion(String path) {
+		/**
+		 * 
+		 */
+		File currentFolder = new File(path);
+		File[] files = currentFolder.listFiles();
+		for (int index = 0; index < files.length; index++) {
+			if (files[index].isFile()) {
+				files[index].delete(); // BORRADO DE FICHERO DENTRO DE CARPETAS.
+			} else {
+				recursiveDeletion(path + "/" + files[index].getName());
+				files[index].delete(); // BORRADO DE CARPETA
+			}
+		}
+		currentFolder.delete();
+	}
+
+	public void registrarMovimiento(String accion, String usuario, String rutaArchivo) {
 		ConnectionToDatabase conexion = new ConnectionToDatabase();
-	    Statement sentencia= conexion.getSentencia();
-	    try {
+		Statement sentencia = conexion.getSentencia();
+		try {
 			Calendar fecha = Calendar.getInstance();
-			sentencia.executeQuery("insert into movements values('"+accion+"',"+"'"+fecha.get(Calendar.DATE)+"'/"+fecha.get(Calendar.MONTH)+"/"+fecha.get(Calendar.YEAR)+"','"
-					+ usuario+"','"+rutaArchivo+"')");
+			sentencia.executeQuery("insert into movements values('" + accion + "'," + "'" + fecha.get(Calendar.DATE)
+					+ "'/" + fecha.get(Calendar.MONTH) + "/" + fecha.get(Calendar.YEAR) + "','" + usuario + "','"
+					+ rutaArchivo + "')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -93,7 +206,7 @@ public class FTPController {
 	public void setCliente(ClientFTP cliente) {
 		this.cliente = cliente;
 	}
-	
+
 	public FTPWindow getFtpWindow() {
 		return ftpWindow;
 	}
