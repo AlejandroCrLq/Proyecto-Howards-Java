@@ -115,7 +115,9 @@ public class WriteMessage extends JFrame {
 
 		DefaultListModel<File> fileModel = new DefaultListModel<File>();
 		JList<File> listFiles = new JList<File>(fileModel);
-		listFiles.addMouseListener(new Events.ListenerDeleteFileFromList(listFiles, fileModel));
+		Events.ListenerDeleteFileFromList deleteFileFromList = new Events.ListenerDeleteFileFromList(listFiles, fileModel);
+		listFiles.addMouseListener(deleteFileFromList);
+		listFiles.addKeyListener(deleteFileFromList);
 		scrollPane.setViewportView(listFiles);
 
 		JLabel label = new JLabel("Archivos");

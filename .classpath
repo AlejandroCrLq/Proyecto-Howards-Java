@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="lib" path="C:/librerias/javax.activation-1.1.0.v201105071233.jar"/>
 	<classpathentry kind="lib" path="C:/librerias/javax.mail.jar"/>
 	<classpathentry kind="lib" path="C:/librerias/jsoup-1.12.1.jar"/>

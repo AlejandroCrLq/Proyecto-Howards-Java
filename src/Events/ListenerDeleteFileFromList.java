@@ -1,5 +1,7 @@
 package Events;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -15,7 +17,7 @@ import javax.swing.JList;
  * @since: 17/12/2019
  */
 
-public class ListenerDeleteFileFromList implements MouseListener {
+public class ListenerDeleteFileFromList implements MouseListener, KeyListener {
 
 	private JList<File> listFiles;
 	private DefaultListModel<File> fileModel;
@@ -28,7 +30,7 @@ public class ListenerDeleteFileFromList implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		try {
-			if (e.getClickCount() >= 2) {
+			if (e.getClickCount() >= 2 && listFiles.getSelectedIndex()!=-1) {
 				fileModel.remove(listFiles.getSelectedIndex());
 			}
 		} catch (ArrayIndexOutOfBoundsException ex) {
@@ -50,6 +52,23 @@ public class ListenerDeleteFileFromList implements MouseListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		if(e.getKeyCode()==KeyEvent.VK_DELETE && listFiles.getSelectedIndex()!=-1) {
+			for(int index : listFiles.getSelectedIndices()) {
+				fileModel.remove(listFiles.getSelectedIndex());
+			}
+		}
 	}
 
 }

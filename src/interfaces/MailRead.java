@@ -93,7 +93,9 @@ public class MailRead extends JFrame {
 			if(!filesInMessage.isEmpty()) {
 				JList<Part> listFiles = new JList<Part>(filesInMessage);
 				listFiles.setCellRenderer(new FilePartRender());
-				listFiles.addMouseListener(new DescargaArchivoListener(listFiles));
+				FileDownloadListener downloadListener = new FileDownloadListener(listFiles, this);
+				listFiles.addMouseListener(downloadListener);
+				listFiles.addKeyListener(downloadListener);
 				JScrollPane scroll = new JScrollPane(listFiles);
 				scroll.setBounds(47, 258, 503, 150);
 				contentPane.add(scroll);
