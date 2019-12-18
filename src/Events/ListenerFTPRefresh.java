@@ -13,6 +13,6 @@ public class ListenerFTPRefresh implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		FtpController.recargarDirectorio();
+		FtpController.recargarDatosJList();
 	}
 }

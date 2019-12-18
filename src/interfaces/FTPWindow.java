@@ -46,6 +46,7 @@ public class FTPWindow extends JFrame {
 	private JList listFileMovements;
 	private JLabel lblDirectory;
 	private JList listFiles;
+	private JPanel panel;
 
 	/**
 	 * Create the frame.
@@ -75,7 +76,7 @@ public class FTPWindow extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		contentPane.add(panel, BorderLayout.WEST);
 		panel.setLayout(new BorderLayout(0, 0));
 
@@ -120,31 +121,35 @@ public class FTPWindow extends JFrame {
 //		panel_1.add(listFileMovements, BorderLayout.CENTER);		
 	}
 
-//	public static File[] combine(File[] listaFicheros1, File[] listaFicheros2) {
-//		int length = listaFicheros1.length + listaFicheros2.length;
-//		File[] result = new File[length];
-//		System.arraycopy(listaFicheros1, 0, result, 0, listaFicheros1.length);
-//		System.arraycopy(listaFicheros2, 0, result, listaFicheros1.length, listaFicheros2.length);
-//		return result;
-//	}
-//
-//	public static JList<File> cargarDatosJList(File archivoACargar) {
-//		JList<File> list = new JList<File>();
-//		recargarDatosJList(list, archivoACargar);
-//		list.setCellRenderer(new RenderizacionDeFicheros());
-//		return list;
-//	}
-//
-//	public static void recargarDatosJList(JList<File> list, File directorioACargar) {
-//		File directorioAnterior = directorioACargar.getParentFile();
-//		File[] listFiles;
-//		if (directorioAnterior != null) {
-//			listFiles = combine(new File[] { directorioAnterior }, directorioACargar.listFiles());
-//		} else {
-//			listFiles = directorioACargar.listFiles();
-//		}
-//		list.setListData(listFiles);
-//	}
+	public void setListFiles(JList listFiles) {
+		this.listFiles = listFiles;
+	}
+
+	public static File[] combine(File[] listaFicheros1, File[] listaFicheros2) {
+		int length = listaFicheros1.length + listaFicheros2.length;
+		File[] result = new File[length];
+		System.arraycopy(listaFicheros1, 0, result, 0, listaFicheros1.length);
+		System.arraycopy(listaFicheros2, 0, result, listaFicheros1.length, listaFicheros2.length);
+		return result;
+	}
+
+	public static JList<File> cargarDatosJList(File archivoACargar) {
+		JList<File> list = new JList<File>();
+		recargarDatosJList(list, archivoACargar);
+		list.setCellRenderer(new RenderizacionDeFicheros());
+		return list;
+	}
+
+	public static void recargarDatosJList(JList<File> list, File directorioACargar) {
+		File directorioAnterior = directorioACargar.getParentFile();
+		File[] listFiles;
+		if (directorioAnterior != null) {
+			listFiles = combine(new File[] { directorioAnterior }, directorioACargar.listFiles());
+		} else {
+			listFiles = directorioACargar.listFiles();
+		}
+		list.setListData(listFiles);
+	}
 
 	/*
 	 * Getter and Setter methods
@@ -179,6 +184,14 @@ public class FTPWindow extends JFrame {
 
 	public JButton getBtnSubirCarpeta() {
 		return btnSubirCarpeta;
+	}
+	
+	public JPanel getPanel() {
+		return panel;
+	}
+
+	public void setPanel(JPanel panel) {
+		this.panel = panel;
 	}
 
 	public JList getListFileMovements() {

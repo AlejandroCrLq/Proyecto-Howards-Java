@@ -1,5 +1,6 @@
 package ftp;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -17,6 +18,7 @@ import java.util.Calendar;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 
 import org.apache.commons.net.ftp.FTPFile;
 
@@ -32,11 +34,11 @@ import interfaces.MailWindow;
 import interfaces.RenderizacionDeFicheros;
 
 public class FTPController {
-	FTPWindow ftpWindow;
+	static FTPWindow ftpWindow;
 	MailWindow mailWindow;
 	Users user;
 	ClientFTP cliente;
-	File selected;
+	static File selected;
 
 	public FTPController(MailWindow mailWindow, FTPWindow ftpWindow, Users user) {
 		this.ftpWindow = ftpWindow;
@@ -44,6 +46,10 @@ public class FTPController {
 		this.user = user;
 		JList listFiles = ftpWindow.getListFiles();
 		listFiles = cargarDatosJList(new File("C:\\"));
+		ftpWindow.setListFiles(listFiles);
+		JScrollPane scrollPane = new JScrollPane(listFiles);
+		ftpWindow.getPanel().add(scrollPane, BorderLayout.CENTER);
+		ftpWindow.repaint();
 	}
 
 	public void AsignarEventos() {
@@ -62,7 +68,7 @@ public class FTPController {
 
 						// Hay que hacer el registro en la base de datos del movimiento fallido.
 					} else {
-//						path.setText("Archivo borrado con éxito.");
+//						path.setText("Archivo borrado con éxito.");           HAY QUE PONER EL MENSAJE EN OTRO LAO
 
 						// Hay que hacer el registro en la base de datos del borrado exitoso.
 					}
@@ -85,7 +91,7 @@ public class FTPController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String path = selected.getParent();
-				File fichero = new File(path + "CarpetaPrueba"); //Seleccionar nombre del archicvo en  la caja de texto
+				File fichero = new File(path + JOptionPane.showInputDialog("Introduce el nombre de la carpeta:")); 
 				fichero.mkdir();
 
 			}
@@ -166,6 +172,17 @@ public class FTPController {
 			listFiles = directorioACargar.listFiles();
 		}
 		list.setListData(listFiles);
+	}
+	
+	public static void recargarDatosJList() {
+		File directorioAnterior = selected.getParentFile();
+		File[] listFiles;
+		if (directorioAnterior != null) {
+			listFiles = combine(new File[] { directorioAnterior }, selected.listFiles());
+		} else {
+			listFiles = selected.listFiles();
+		}
+		ftpWindow.getListFiles().setListData(listFiles);
 	}
 
 	public void recursiveDeletion(String path) {
