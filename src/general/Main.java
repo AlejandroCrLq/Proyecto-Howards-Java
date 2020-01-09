@@ -9,6 +9,4 @@ public class Main {
 		Thread splashThread = new Thread(splash);
 		splashThread.start();
 	}
-
-
 }
