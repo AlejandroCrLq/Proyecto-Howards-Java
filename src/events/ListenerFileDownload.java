@@ -1,4 +1,4 @@
-package interfaces;
+package events;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -20,6 +20,8 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
+import interfaces.MailRead;
+
 /**
  * La clase DescargaArchivoListener se encarga de
  *
@@ -28,12 +30,12 @@ import javax.swing.JOptionPane;
  * @since: 17/12/2019
  */
 
-public class FileDownloadListener implements MouseListener, KeyListener {
+public class ListenerFileDownload implements MouseListener, KeyListener {
 
 	private JList<Part> listFiles;
 	private MailRead mailRead;
 
-	public FileDownloadListener(JList<Part> listFiles, MailRead read) {
+	public ListenerFileDownload(JList<Part> listFiles, MailRead read) {
 		this.listFiles = listFiles;
 		mailRead = read;
 	}

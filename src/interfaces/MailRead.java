@@ -23,6 +23,10 @@ import javax.swing.border.EmptyBorder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import events.ListenerAnswerMessage;
+import events.ListenerFileDownload;
+import interfaces.cellrenders.FilePartRender;
+
 public class MailRead extends JFrame {
 
 	private JPanel contentPane;
@@ -69,27 +73,7 @@ public class MailRead extends JFrame {
 
 		JButton btnResponder = new JButton("Responder");
 		btnResponder.setBounds(113, 266, 112, 23);
-		btnResponder.addActionListener(e -> {
-			WriteMessage write = new WriteMessage();
-			try {
-				String from1 = message.getFrom()[0].toString();
-				try {
-					from1 = from1.substring(from1.indexOf("<") + 1, from1.indexOf(">"));
-				} catch (IndexOutOfBoundsException ex) {
-					// Normal from, without substring itself
-				}
-				write.getTextFor().setText(from1);
-
-				write.getTextSubject().setText("RE: " + message.getSubject());
-
-				write.getTextFor().setEnabled(false);
-				write.getTextSubject().setEnabled(false);
-			} catch (MessagingException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-
-		});
+		btnResponder.addActionListener(new ListenerAnswerMessage(message));
 		contentPane.add(btnResponder);
 
 		if (message.getContentType().contains("multipart")) {
@@ -97,7 +81,7 @@ public class MailRead extends JFrame {
 			if (!filesInMessage.isEmpty()) {
 				JList<Part> listFiles = new JList<Part>(filesInMessage);
 				listFiles.setCellRenderer(new FilePartRender());
-				FileDownloadListener downloadListener = new FileDownloadListener(listFiles, this);
+				ListenerFileDownload downloadListener = new ListenerFileDownload(listFiles, this);
 				listFiles.addMouseListener(downloadListener);
 				listFiles.addKeyListener(downloadListener);
 				JScrollPane scroll = new JScrollPane(listFiles);

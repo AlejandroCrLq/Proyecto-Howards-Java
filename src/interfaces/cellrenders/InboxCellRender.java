@@ -1,4 +1,4 @@
-package mail;
+package interfaces.cellrenders;
 
 import java.awt.Component;
 

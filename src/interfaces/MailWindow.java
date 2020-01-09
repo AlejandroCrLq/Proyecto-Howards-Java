@@ -17,6 +17,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
+import interfaces.cellrenders.MessageRender;
 import mail.MailInbox;
 
 public class MailWindow extends JFrame {
@@ -42,6 +43,7 @@ public class MailWindow extends JFrame {
 	private MailInbox inbox;
 
 	private JList<Message> listUserMails;
+	private DefaultListModel<Message> messageModel;
 
 	/**
 	 * Create the frame.
@@ -62,9 +64,6 @@ public class MailWindow extends JFrame {
 		menuBar.add(btnOpenFTP);
 
 		btnWriteMail = new JButton("Redactar");
-		btnWriteMail.addActionListener(e -> {
-			new WriteMessage();
-		});
 		menuBar.add(btnWriteMail);
 
 		btnAbout = new JButton("Acerca de");
@@ -74,22 +73,12 @@ public class MailWindow extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 
-		DefaultListModel<Message> messageModel = new DefaultListModel<Message>();
+		messageModel = new DefaultListModel<Message>();
 		listUserMails = new JList<Message>(messageModel);
 		listUserMails.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listUserMails.setCellRenderer(new MessageRender());
 		JScrollPane scroll = new JScrollPane(listUserMails);
 		contentPane.add(scroll, BorderLayout.CENTER);
-
-		MailInbox mailTools = new MailInbox(messageModel, this);
-		try {
-			mailTools.fillInbox();
-			mailTools.addListener(listUserMails);
-			mailTools.refresh();
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public JButton getBtnAbout() {
@@ -106,5 +95,9 @@ public class MailWindow extends JFrame {
 
 	public JList<Message> getListUserMails() {
 		return listUserMails;
+	}
+
+	public DefaultListModel<Message> getMessageModel() {
+		return messageModel;
 	}
 }

@@ -1,4 +1,4 @@
-package interfaces;
+package interfaces.cellrenders;
 
 import java.awt.Component;
 

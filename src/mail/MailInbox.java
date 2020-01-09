@@ -1,9 +1,5 @@
 package mail;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -22,8 +18,13 @@ import javax.swing.JOptionPane;
 
 import interfaces.MailRead;
 import interfaces.MailWindow;
+import threads.ThreadRefreshMail;
 
 public class MailInbox {
+
+	/**
+	 * acorralluque.sanjose@alumnado.fundacionloyola.net 92405668
+	 */
 
 	private static Folder inbox;
 	private static String mailHost = "pop.gmail.com";
@@ -32,11 +33,15 @@ public class MailInbox {
 	private static String mailUser = "acorralluque.sanjose@alumnado.fundacionloyola.net"; // COGERLOS DEL SITIO
 	private static Properties props;
 	private ArrayList<String> identifications = new ArrayList<String>();
+	private JList<Message> mailInbox;
 	private MailWindow mailWindow;
 	private DefaultListModel<Message> messageModel;
 	private Store store;
 
-	public MailInbox(DefaultListModel<Message> messageModel, MailWindow mailWindow) throws MessagingException {
+	public MailInbox(String mailUser, String mailPassword, DefaultListModel<Message> messageModel,
+			MailWindow mailWindow) throws MessagingException {
+		this.mailUser = mailUser;
+		this.mailPassword = mailPassword;
 		this.mailWindow = mailWindow;
 		props = new Properties();
 		props.put("mail.pop3.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
@@ -59,22 +64,10 @@ public class MailInbox {
 	 * @throws MessagingException
 	 */
 	public void addListener(JList<Message> mailInbox) throws MessagingException {
-		mailInbox.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent evt) {
-				if (evt.getClickCount() >= 2) {
-					readMessage(mailInbox);
-				}
-			}
-		});
-		mailInbox.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent ke) {
-				if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
-					readMessage(mailInbox);
-				}
-			}
-		});
+		this.mailInbox = mailInbox;
+		events.ListenerReadMessage listenerReadMail = new events.ListenerReadMessage(this);
+		mailInbox.addMouseListener(listenerReadMail);
+		mailInbox.addKeyListener(listenerReadMail);
 	}
 
 	/**
@@ -88,7 +81,6 @@ public class MailInbox {
 		store.connect(mailHost, mailUser, mailPassword);
 		inbox = store.getFolder("Inbox");
 		inbox.open(Folder.READ_WRITE);
-
 		mailWindow.setTitle(mailUser + " (" + inbox.getUnreadMessageCount() + ")");
 
 		for (Message message : inbox.getMessages()) {
@@ -101,7 +93,7 @@ public class MailInbox {
 		}
 	}
 
-	private void readMessage(JList<Message> mailInbox) {
+	public void readMessage() {
 		if (mailInbox.getSelectedIndex() != -1) {
 			try {
 				MailRead mailRead = new MailRead(messageModel.elementAt(mailInbox.getSelectedIndex()));
@@ -118,7 +110,7 @@ public class MailInbox {
 
 	public void refresh() {
 		try {
-			refreshMailThread refresh = new refreshMailThread(this);
+			ThreadRefreshMail refresh = new ThreadRefreshMail(this);
 			refresh.start();
 		} catch (MessagingException | InterruptedException e) {
 			JOptionPane.showMessageDialog(new JFrame(),

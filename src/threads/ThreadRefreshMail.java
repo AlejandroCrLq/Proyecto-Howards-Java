@@ -1,12 +1,14 @@
-package mail;
+package threads;
 
 import javax.mail.MessagingException;
 
-public class refreshMailThread extends Thread {
+import mail.MailInbox;
+
+public class ThreadRefreshMail extends Thread {
 
 	private MailInbox inbox;
 
-	public refreshMailThread(MailInbox inbox) throws MessagingException, InterruptedException {
+	public ThreadRefreshMail(MailInbox inbox) throws MessagingException, InterruptedException {
 		this.inbox = inbox;
 	}
 
