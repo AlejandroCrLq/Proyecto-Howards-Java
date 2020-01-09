@@ -46,7 +46,7 @@ public class MainMenuController implements ActionListener{
 					}else {
 						FtpController.setCliente(clientFTP);						
 						FtpController.AsignarEventos();
-						FtpController.recargarDirectorio();
+						//FtpController.recargarDirectorio();
 					}
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block

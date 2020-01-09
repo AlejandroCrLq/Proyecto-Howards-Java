@@ -85,15 +85,22 @@ public class FTPController {
 		ftpWindow.getTxtFileName().addActionListener(
 				new ListenerNameChange(ftpWindow.getLblFilePath(), ftpWindow.getTxtFileName(), this));
 		ftpWindow.getBtnRefrescar().addActionListener(new ListenerFTPRefresh(this));
+		
 
 		ftpWindow.getBtnCrearCarpeta().addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String path = selected.getParent();
-				File fichero = new File(path + JOptionPane.showInputDialog("Introduce el nombre de la carpeta:")); 
-				fichero.mkdir();
-
+				if(selected!= null) {
+					String path = selected.getParent();
+					File fichero = new File(path + JOptionPane.showInputDialog("Introduce el nombre de la carpeta:")); 
+					fichero.mkdir();	
+				}
+				else {
+					String path = "C:\\";
+					File fichero = new File(path + JOptionPane.showInputDialog("Introduce el nombre de la carpeta:")); 
+					fichero.mkdir();
+				}
 			}
 
 		});
