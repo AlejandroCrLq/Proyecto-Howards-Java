@@ -43,9 +43,9 @@ public class FTPWindow extends JFrame {
 	private JButton btnBorrar;
 	private JButton btnRefrescar;
 	private JButton btnSubirCarpeta;
-	private JList listFileMovements;
+	private JList<File> listFileMovements;
 	private JLabel lblDirectory;
-	private JList listFiles;
+	private JList<File> listFiles;
 	private JPanel panel;
 
 	/**
