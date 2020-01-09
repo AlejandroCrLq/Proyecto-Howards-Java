@@ -6,16 +6,15 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class ConfigurationData {
-	public enum Property{
-		ftpServer,
-		ftpPort
+	public enum Property {
+		ftpPort, ftpServer
 	}
 
 	private InputStream inputStream;
 
 	public String ReadProperty(String propertyToRead) throws IOException {
 		String result = "";
-		
+
 		try {
 			Properties prop = new Properties();
 			String propFileName = "config.resources";
@@ -27,7 +26,7 @@ public class ConfigurationData {
 			} else {
 				throw new FileNotFoundException("Property file '" + propFileName + "' not found in the classpath");
 			}
-			
+
 			result = prop.getProperty(propertyToRead);
 
 		} catch (Exception e) {
@@ -35,7 +34,7 @@ public class ConfigurationData {
 		} finally {
 			inputStream.close();
 		}
-		
+
 		return result;
 	}
 

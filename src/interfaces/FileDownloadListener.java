@@ -35,14 +35,7 @@ public class FileDownloadListener implements MouseListener, KeyListener {
 
 	public FileDownloadListener(JList<Part> listFiles, MailRead read) {
 		this.listFiles = listFiles;
-		this.mailRead = read;
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		if (e.getClickCount() == 2) {
-			download();
-		}
+		mailRead = read;
 	}
 
 	private void download() {
@@ -59,7 +52,7 @@ public class FileDownloadListener implements MouseListener, KeyListener {
 				}
 				int userSelection = fileChooser.showSaveDialog(new JFrame());
 				File fileToSave = fileChooser.getSelectedFile();
-				if (!fileToSave.getName().contains(".") && extension != null) {
+				if (!fileToSave.getName().contains(".") && (extension != null)) {
 					fileToSave = new File(fileToSave.getAbsolutePath() + extension);
 				}
 				boolean replaced = false;
@@ -111,7 +104,7 @@ public class FileDownloadListener implements MouseListener, KeyListener {
 				String extension = ".zip";
 				int userSelection = fileChooser.showSaveDialog(new JFrame());
 				File fileToSave = fileChooser.getSelectedFile();
-				if (!fileToSave.getName().contains(".") && extension != null) {
+				if (!fileToSave.getName().contains(".") && (extension != null)) {
 					fileToSave = new File(fileToSave.getAbsolutePath() + extension);
 				}
 				boolean replaced = false;
@@ -179,6 +172,10 @@ public class FileDownloadListener implements MouseListener, KeyListener {
 	}
 
 	@Override
+	public void keyPressed(KeyEvent e) {
+	}
+
+	@Override
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			download();
@@ -186,11 +183,14 @@ public class FileDownloadListener implements MouseListener, KeyListener {
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
+	public void keyTyped(KeyEvent e) {
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
+	public void mouseClicked(MouseEvent e) {
+		if (e.getClickCount() == 2) {
+			download();
+		}
 	}
 
 	@Override
@@ -202,10 +202,10 @@ public class FileDownloadListener implements MouseListener, KeyListener {
 	}
 
 	@Override
-	public void keyTyped(KeyEvent e) {
+	public void mousePressed(MouseEvent e) {
 	}
 
 	@Override
-	public void keyPressed(KeyEvent e) {
+	public void mouseReleased(MouseEvent e) {
 	}
 }

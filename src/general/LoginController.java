@@ -7,34 +7,31 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.util.Base64;
+
 import javax.swing.JOptionPane;
 
 import ftp.Users;
 import interfaces.Login;
+
 /**
  * Clase que controla el acceso del usuario.
+ * 
  * @author Alexs
  *
  */
 public class LoginController implements ActionListener {
-	Login log;
 	ConnectionToDatabase connect;
+	Login log;
 	ResultSet rs;
 
 	public LoginController(Login log, ConnectionToDatabase connect) {
 		this.log = log;
 		this.connect = connect;
 	}
-	/**
-	 * Método que añade los listeners al botón del login.
-	 */
-	public void addListeners() {
-		log.getBtnNewButton().addActionListener(this);
-	}
 
 	/**
-	 * Método que controla el acceso a la aplicación. En caso de error muestra un mensaje y en caso contrario
-	 * permite el acceso a la aplicación.
+	 * Método que controla el acceso a la aplicación. En caso de error muestra un
+	 * mensaje y en caso contrario permite el acceso a la aplicación.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -77,9 +74,18 @@ public class LoginController implements ActionListener {
 			}
 		}
 	}
-	
+
 	/**
-	 * Método que permite comprobar la contraseña en la base de datos y compararla con la escrita por el usuario.
+	 * Método que añade los listeners al botón del login.
+	 */
+	public void addListeners() {
+		log.getBtnNewButton().addActionListener(this);
+	}
+
+	/**
+	 * Método que permite comprobar la contraseña en la base de datos y compararla
+	 * con la escrita por el usuario.
+	 * 
 	 * @param password Contraseña escrita por el usuario en la ventana login.
 	 * @return Devuelve true si la contraseña es correcta y false si es erronea.
 	 */

@@ -2,15 +2,11 @@ package mail;
 
 import java.awt.Component;
 
-import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
-import javax.swing.ListCellRenderer;
-
-import com.sun.mail.pop3.POP3Message;
 
 /**
  * La clase InboxCellRender se encarga de
@@ -22,7 +18,6 @@ import com.sun.mail.pop3.POP3Message;
 
 public class InboxCellRender extends DefaultListCellRenderer {
 
-
 	private DefaultListModel<Message> messageModel;
 
 	public InboxCellRender(DefaultListModel<Message> messageModel) {
@@ -32,7 +27,7 @@ public class InboxCellRender extends DefaultListCellRenderer {
 	@Override
 	public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
 			boolean cellHasFocus) {
-		
+
 		System.out.println("Hola");
 		Message message = messageModel.getElementAt(index);
 		try {

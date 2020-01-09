@@ -36,39 +36,38 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 public class WriteMessage extends JFrame {
-	private JPanel contentPane;
-	private JTextField textFor;
-	private JTextField textSubject;
-	private JTextArea textMessage;
-
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					WriteMessage frame = new WriteMessage();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		EventQueue.invokeLater(() -> {
+			try {
+				WriteMessage frame = new WriteMessage();
+				frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}
+
+	private JPanel contentPane;
+	private JTextField textFor;
+	private JTextArea textMessage;
+
+	private JTextField textSubject;
 
 	/**
 	 * Create the frame.
 	 */
 	public WriteMessage() {
-		setTitle("Universidad de Howards");
+		setTitle("Escritura de mensajes");
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
-		this.setLocationRelativeTo(null);
+		setLocationRelativeTo(null);
 
 		JLayeredPane layeredPane = new JLayeredPane();
 		contentPane.add(layeredPane, BorderLayout.CENTER);
@@ -115,7 +114,8 @@ public class WriteMessage extends JFrame {
 
 		DefaultListModel<File> fileModel = new DefaultListModel<File>();
 		JList<File> listFiles = new JList<File>(fileModel);
-		Events.ListenerDeleteFileFromList deleteFileFromList = new Events.ListenerDeleteFileFromList(listFiles, fileModel);
+		Events.ListenerDeleteFileFromList deleteFileFromList = new Events.ListenerDeleteFileFromList(listFiles,
+				fileModel);
 		listFiles.addMouseListener(deleteFileFromList);
 		listFiles.addKeyListener(deleteFileFromList);
 		scrollPane.setViewportView(listFiles);
@@ -129,10 +129,11 @@ public class WriteMessage extends JFrame {
 		btnAddFile.setBounds(250, 505, 133, 25);
 		layeredPane.add(btnAddFile);
 		btnAddFile.addActionListener(new Events.ListenerAddFile(fileModel));
-		this.setVisible(true);
+		setVisible(true);
 
 		btnSend.addActionListener(new ActionListener() {
 
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				setEnabled(false);
 				Thread messageSender = new Thread() {
@@ -171,6 +172,7 @@ public class WriteMessage extends JFrame {
 					props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
 					Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+						@Override
 						protected PasswordAuthentication getPasswordAuthentication() {
 							return new PasswordAuthentication(from, password);
 						}
@@ -226,23 +228,23 @@ public class WriteMessage extends JFrame {
 		return textFor;
 	}
 
-	public void setTextFor(JTextField textFor) {
-		this.textFor = textFor;
+	public JTextArea getTextMessage() {
+		return textMessage;
 	}
 
 	public JTextField getTextSubject() {
 		return textSubject;
 	}
 
-	public void setTextSubject(JTextField textSubject) {
-		this.textSubject = textSubject;
-	}
-
-	public JTextArea getTextMessage() {
-		return textMessage;
+	public void setTextFor(JTextField textFor) {
+		this.textFor = textFor;
 	}
 
 	public void setTextMessage(JTextArea textMessage) {
 		this.textMessage = textMessage;
+	}
+
+	public void setTextSubject(JTextField textSubject) {
+		this.textSubject = textSubject;
 	}
 }

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -20,20 +21,23 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import interfaces.MailRead;
+import interfaces.MailWindow;
 
 public class MailInbox {
 
+	private static Folder inbox;
 	private static String mailHost = "pop.gmail.com";
-	private static String mailUser = "acorralluque.sanjose@alumnado.fundacionloyola.net"; // COGERLOS DEL SITIO
 	private static String mailPassword = "92405668"; //
 	private static String mailPort = "995";
-	private static Folder inbox;
-	private DefaultListModel<Message> messageModel;
+	private static String mailUser = "acorralluque.sanjose@alumnado.fundacionloyola.net"; // COGERLOS DEL SITIO
 	private static Properties props;
 	private ArrayList<String> identifications = new ArrayList<String>();
+	private MailWindow mailWindow;
+	private DefaultListModel<Message> messageModel;
 	private Store store;
 
-	public MailInbox(DefaultListModel<Message> messageModel) throws MessagingException {
+	public MailInbox(DefaultListModel<Message> messageModel, MailWindow mailWindow) throws MessagingException {
+		this.mailWindow = mailWindow;
 		props = new Properties();
 		props.put("mail.pop3.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 		props.put("mail.pop3.socketFactory.fallback", "false");
@@ -48,8 +52,34 @@ public class MailInbox {
 	// connect to my pop3 inbox
 
 	/**
+	 * This grab the JList and add an Double Click Action listener in order to read
+	 * the clicked email.
+	 *
+	 * @param mailInbox
+	 * @throws MessagingException
+	 */
+	public void addListener(JList<Message> mailInbox) throws MessagingException {
+		mailInbox.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent evt) {
+				if (evt.getClickCount() >= 2) {
+					readMessage(mailInbox);
+				}
+			}
+		});
+		mailInbox.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent ke) {
+				if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
+					readMessage(mailInbox);
+				}
+			}
+		});
+	}
+
+	/**
 	 * Fills it with the messages from the connected user
-	 * 
+	 *
 	 * @throws MessagingException
 	 */
 	public void fillInbox() throws MessagingException {
@@ -57,7 +87,9 @@ public class MailInbox {
 		store = session.getStore("pop3");
 		store.connect(mailHost, mailUser, mailPassword);
 		inbox = store.getFolder("Inbox");
-		inbox.open(Folder.READ_ONLY);
+		inbox.open(Folder.READ_WRITE);
+
+		mailWindow.setTitle(mailUser + " (" + inbox.getUnreadMessageCount() + ")");
 
 		for (Message message : inbox.getMessages()) {
 			MimeMessage mime = (MimeMessage) message;
@@ -69,37 +101,18 @@ public class MailInbox {
 		}
 	}
 
-	/**
-	 * This grab the JList and add an Double Click Action listener in order to read
-	 * the clicked email.
-	 * 
-	 * @param mailInbox
-	 * @throws MessagingException
-	 */
-	public void addListener(JList<Message> mailInbox) throws MessagingException {
-		mailInbox.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent evt) {
-				if (evt.getClickCount() >= 2) {
-					readMessage(mailInbox);
-				}
-			}
-		});
-		mailInbox.addKeyListener(new KeyAdapter() {
-			public void keyReleased(KeyEvent ke) {
-				if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
-					readMessage(mailInbox);
-				}
-			}
-		});
-	}
-
 	private void readMessage(JList<Message> mailInbox) {
-		try {
-			MailRead mailRead = new MailRead(messageModel.elementAt(mailInbox.getSelectedIndex()));
-			mailRead.setVisible(true);
-		} catch (MessagingException | IOException e) {
-			JOptionPane.showMessageDialog(new JFrame(),
-					"Error abriendo el mensaje, puede que no haya conexión a internet o el mensaje haya sido eliminado");
+		if (mailInbox.getSelectedIndex() != -1) {
+			try {
+				MailRead mailRead = new MailRead(messageModel.elementAt(mailInbox.getSelectedIndex()));
+				mailRead.setVisible(true);
+				inbox.setFlags(new Message[] { messageModel.elementAt(mailInbox.getSelectedIndex()) },
+						new Flags(Flags.Flag.SEEN), true);
+
+			} catch (MessagingException | IOException e) {
+				JOptionPane.showMessageDialog(new JFrame(),
+						"Error abriendo el mensaje, puede que no haya conexión a internet o el mensaje haya sido eliminado");
+			}
 		}
 	}
 

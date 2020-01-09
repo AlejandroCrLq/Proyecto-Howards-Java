@@ -19,8 +19,8 @@ import javax.swing.JList;
 
 public class ListenerDeleteFileFromList implements MouseListener, KeyListener {
 
-	private JList<File> listFiles;
 	private DefaultListModel<File> fileModel;
+	private JList<File> listFiles;
 
 	public ListenerDeleteFileFromList(JList<File> listFiles, DefaultListModel<File> fileModel) {
 		this.listFiles = listFiles;
@@ -28,22 +28,31 @@ public class ListenerDeleteFileFromList implements MouseListener, KeyListener {
 	}
 
 	@Override
+	public void keyPressed(KeyEvent e) {
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		if ((e.getKeyCode() == KeyEvent.VK_DELETE) && (listFiles.getSelectedIndex() != -1)) {
+			for (int index : listFiles.getSelectedIndices()) {
+				fileModel.remove(listFiles.getSelectedIndex());
+			}
+		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+	}
+
+	@Override
 	public void mouseClicked(MouseEvent e) {
 		try {
-			if (e.getClickCount() >= 2 && listFiles.getSelectedIndex()!=-1) {
+			if ((e.getClickCount() >= 2) && (listFiles.getSelectedIndex() != -1)) {
 				fileModel.remove(listFiles.getSelectedIndex());
 			}
 		} catch (ArrayIndexOutOfBoundsException ex) {
 			System.out.println("No se seleccionó ningún archivo");
 		}
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
 	}
 
 	@Override
@@ -55,20 +64,11 @@ public class ListenerDeleteFileFromList implements MouseListener, KeyListener {
 	}
 
 	@Override
-	public void keyTyped(KeyEvent e) {
+	public void mousePressed(MouseEvent e) {
 	}
 
 	@Override
-	public void keyPressed(KeyEvent e) {
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		if(e.getKeyCode()==KeyEvent.VK_DELETE && listFiles.getSelectedIndex()!=-1) {
-			for(int index : listFiles.getSelectedIndices()) {
-				fileModel.remove(listFiles.getSelectedIndex());
-			}
-		}
+	public void mouseReleased(MouseEvent e) {
 	}
 
 }

@@ -2,8 +2,6 @@ package interfaces;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -15,43 +13,43 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
-import mail.InboxCellRender;
 import mail.MailInbox;
 
 public class MailWindow extends JFrame {
-
-	private JPanel contentPane;
-	private JButton btnAbout;
-	private JButton btnOpenFTP;
-	private JButton btnWriteMail;
-	private JList<Message> listUserMails;
-	private MailInbox inbox;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MailWindow frame = new MailWindow();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		EventQueue.invokeLater(() -> {
+			try {
+				MailWindow frame = new MailWindow();
+				frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}
 
+	private JButton btnAbout;
+	private JButton btnOpenFTP;
+	private JButton btnWriteMail;
+	private JPanel contentPane;
+	private MailInbox inbox;
+
+	private JList<Message> listUserMails;
+
 	/**
 	 * Create the frame.
-	 * 
+	 *
 	 * @throws MessagingException
 	 */
 	public MailWindow() throws MessagingException {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 600);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -64,11 +62,8 @@ public class MailWindow extends JFrame {
 		menuBar.add(btnOpenFTP);
 
 		btnWriteMail = new JButton("Redactar");
-		btnWriteMail.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				WriteMessage write = new WriteMessage();
-			}
+		btnWriteMail.addActionListener(e -> {
+			new WriteMessage();
 		});
 		menuBar.add(btnWriteMail);
 
@@ -81,11 +76,12 @@ public class MailWindow extends JFrame {
 
 		DefaultListModel<Message> messageModel = new DefaultListModel<Message>();
 		listUserMails = new JList<Message>(messageModel);
+		listUserMails.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listUserMails.setCellRenderer(new MessageRender());
 		JScrollPane scroll = new JScrollPane(listUserMails);
 		contentPane.add(scroll, BorderLayout.CENTER);
 
-		MailInbox mailTools = new MailInbox(messageModel);
+		MailInbox mailTools = new MailInbox(messageModel, this);
 		try {
 			mailTools.fillInbox();
 			mailTools.addListener(listUserMails);

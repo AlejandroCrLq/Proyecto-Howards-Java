@@ -1,10 +1,6 @@
 package mail;
 
-import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.swing.JList;
-
-import interfaces.MailWindow;
 
 public class refreshMailThread extends Thread {
 
@@ -14,6 +10,7 @@ public class refreshMailThread extends Thread {
 		this.inbox = inbox;
 	}
 
+	@Override
 	public void run() {
 		while (true) {
 			try {
