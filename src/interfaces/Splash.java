@@ -15,6 +15,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import general.ConnectionToDatabase;
+import general.LoginController;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
@@ -46,6 +50,10 @@ public class Splash extends JFrame implements Runnable {
 			this.setLocationRelativeTo(null);
 			this.setVisible(true);
 			Thread.sleep(4000);
+			Login log = new Login();
+			ConnectionToDatabase connect = new ConnectionToDatabase();
+			LoginController control = new LoginController(log, connect);
+			control.addListeners();
 			this.dispose();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
