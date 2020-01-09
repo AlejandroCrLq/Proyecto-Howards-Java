@@ -1,6 +1,6 @@
 package general;
 
-import interfaces.Login;
+import interfaces.LoginWindow;
 import interfaces.Splash;
 
 public class Main {
@@ -8,7 +8,7 @@ public class Main {
 		Splash splash = new Splash();
 		Thread splashThread = new Thread(splash);
 		splashThread.start();
-		Login log = new Login();
+		LoginWindow log = new LoginWindow();
 		ConnectionToDatabase connect = new ConnectionToDatabase();
 		LoginController control = new LoginController(log, connect);
 		control.addListeners();

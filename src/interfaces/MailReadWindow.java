@@ -27,7 +27,7 @@ import Events.ListenerAnswerMessage;
 import Events.ListenerFileDownload;
 import interfaces.cellrenders.FilePartRender;
 
-public class MailRead extends JFrame {
+public class MailReadWindow extends JFrame {
 
 	private JPanel contentPane;
 	private JTextArea textField;
@@ -38,7 +38,7 @@ public class MailRead extends JFrame {
 	 * @throws MessagingException
 	 * @throws IOException
 	 */
-	public MailRead(Message message) throws MessagingException, IOException {
+	public MailReadWindow(Message message) throws MessagingException, IOException {
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 600, 350);
 		contentPane = new JPanel();

@@ -1,14 +1,12 @@
 package threads;
 
-import javax.mail.MessagingException;
-
 import mail.MailInbox;
 
 public class ThreadRefreshMail extends Thread {
 
 	private MailInbox inbox;
 
-	public ThreadRefreshMail(MailInbox inbox) throws MessagingException, InterruptedException {
+	public ThreadRefreshMail(MailInbox inbox) {
 		this.inbox = inbox;
 	}
 
@@ -20,8 +18,7 @@ public class ThreadRefreshMail extends Thread {
 				Thread.sleep(10000);
 				System.out.println("se refresca");
 				inbox.fillInbox();
-			} catch (InterruptedException | MessagingException e) {
-				// TODO Auto-generated catch block
+			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 

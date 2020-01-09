@@ -1,7 +1,6 @@
 package interfaces;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.io.File;
 
@@ -19,22 +18,11 @@ import javax.swing.border.EmptyBorder;
 
 import Events.ListenerSendMessage;
 
-public class WriteMessage extends JFrame {
+public class WriteMessageWindow extends JFrame {
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(() -> {
-			try {
-				WriteMessage frame = new WriteMessage();
-				frame.setVisible(true);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
-	}
-
 	private JPanel contentPane;
 	private JTextField textFor;
 	private JTextArea textMessage;
@@ -44,7 +32,7 @@ public class WriteMessage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public WriteMessage() {
+	public WriteMessageWindow() {
 		setTitle("Escritura de mensajes");
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();

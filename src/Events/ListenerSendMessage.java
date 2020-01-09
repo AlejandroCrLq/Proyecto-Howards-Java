@@ -6,15 +6,15 @@ import java.io.File;
 
 import javax.swing.DefaultListModel;
 
-import interfaces.WriteMessage;
+import interfaces.WriteMessageWindow;
 import threads.ThreadSendMessage;
 
 public class ListenerSendMessage implements ActionListener {
 
 	private final DefaultListModel<File> fileModel;
-	private WriteMessage frame;
+	private WriteMessageWindow frame;
 
-	public ListenerSendMessage(DefaultListModel<File> fileModel, WriteMessage frame) {
+	public ListenerSendMessage(DefaultListModel<File> fileModel, WriteMessageWindow frame) {
 		this.fileModel = fileModel;
 		this.frame = frame;
 	}

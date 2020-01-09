@@ -2,7 +2,7 @@ package general;
 
 import javax.mail.MessagingException;
 
-import ftp.Users;
+import interfaces.FTPWindow;
 import interfaces.MailWindow;
 import mail.MailInbox;
 
@@ -16,16 +16,19 @@ import mail.MailInbox;
 
 public class MailController {
 
-	public MailController(Users user) throws MessagingException {
-		MailWindow mailWindow = new MailWindow();
-		MailInbox mailTools = new MailInbox(user.geteMail(), user.getPassword(), mailWindow.getMessageModel(),
-				mailWindow);
+	private FTPWindow ftpWindow;
+	private MailWindow mailWindow;
+
+	public MailController(String user, String pass, MailWindow mailWindow, FTPWindow ftpWindow) {
+		this.mailWindow = mailWindow;
+		this.ftpWindow = ftpWindow;
+		MailInbox mailTools = new MailInbox(user, pass, this.mailWindow.getMessageModel(), this.mailWindow);
 		try {
 			mailTools.fillInbox();
-			mailWindow.getBtnWriteMail().addActionListener(new Events.ListenerOpenWriteMessage());
-			mailTools.addListener(mailWindow.getListUserMails());
-			mailWindow.setVisible(true);
-			mailTools.refresh();
+			this.mailWindow.getBtnWriteMail().addActionListener(new Events.ListenerOpenWriteMessage());
+			mailTools.addListener(this.mailWindow.getListUserMails());
+			this.mailWindow.setVisible(true);
+			mailTools.setAutoRefresh();
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}

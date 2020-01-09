@@ -3,11 +3,11 @@ package Events;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import interfaces.WriteMessage;
+import interfaces.WriteMessageWindow;
 
 public class ListenerOpenWriteMessage implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		new WriteMessage().setVisible(true);
+		new WriteMessageWindow().setVisible(true);
 	}
 }

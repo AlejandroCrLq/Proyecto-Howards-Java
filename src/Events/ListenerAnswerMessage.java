@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 
-import interfaces.WriteMessage;
+import interfaces.WriteMessageWindow;
 
 public class ListenerAnswerMessage implements ActionListener {
 	private final Message message;
@@ -17,7 +17,7 @@ public class ListenerAnswerMessage implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		WriteMessage write = new WriteMessage();
+		WriteMessageWindow write = new WriteMessageWindow();
 		try {
 			String from1 = message.getFrom()[0].toString();
 			try {

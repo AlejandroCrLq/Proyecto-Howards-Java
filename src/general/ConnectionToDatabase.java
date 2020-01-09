@@ -14,7 +14,7 @@ public class ConnectionToDatabase {
 	public ConnectionToDatabase() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			connect = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/howards", "root", "");
+			connect = (Connection) DriverManager.getConnection("jdbc:mysql://192.168.11.145/howards", "general", "123");
 		} catch (ClassNotFoundException cn) {
 			cn.printStackTrace();
 		} catch (SQLException e) {

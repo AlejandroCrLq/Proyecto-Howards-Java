@@ -20,14 +20,14 @@ import javax.mail.internet.MimeMultipart;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
-import interfaces.WriteMessage;
+import interfaces.WriteMessageWindow;
 
 public class ThreadSendMessage extends Thread {
 
 	private DefaultListModel<File> fileModel;
-	private WriteMessage frame;
+	private WriteMessageWindow frame;
 
-	public ThreadSendMessage(DefaultListModel<File> fileModel, WriteMessage frame) {
+	public ThreadSendMessage(DefaultListModel<File> fileModel, WriteMessageWindow frame) {
 		this.fileModel = fileModel;
 		this.frame = frame;
 	}

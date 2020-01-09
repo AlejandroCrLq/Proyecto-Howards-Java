@@ -8,6 +8,7 @@ import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.MimeMessage;
@@ -16,7 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
-import interfaces.MailRead;
+import interfaces.MailReadWindow;
 import interfaces.MailWindow;
 import threads.ThreadRefreshMail;
 
@@ -28,21 +29,25 @@ public class MailInbox {
 
 	private static Folder inbox;
 	private static String mailHost = "pop.gmail.com";
-	private static String mailPassword = "92405668"; //
+	private static String mailPassword; //
 	private static String mailPort = "995";
-	private static String mailUser = "acorralluque.sanjose@alumnado.fundacionloyola.net"; // COGERLOS DEL SITIO
+	private static String mailUser; // COGERLOS DEL SITIO
 	private static Properties props;
-	private ArrayList<String> identifications = new ArrayList<String>();
-	private JList<Message> mailInbox;
-	private MailWindow mailWindow;
-	private DefaultListModel<Message> messageModel;
-	private Store store;
 
-	public MailInbox(String mailUser, String mailPassword, DefaultListModel<Message> messageModel,
-			MailWindow mailWindow) throws MessagingException {
-		this.mailUser = mailUser;
-		this.mailPassword = mailPassword;
-		this.mailWindow = mailWindow;
+	private static Store store;
+
+	private static void conect(String mailUser, String mailPassword)
+			throws NoSuchProviderException, MessagingException {
+		Session session = Session.getDefaultInstance(props);
+		store = session.getStore("pop3");
+		store.connect(mailUser, mailPassword);
+	}
+
+	public static void setMailPassword(String mailPassword) {
+		MailInbox.mailPassword = mailPassword;
+	}
+
+	public static void setProperties(String mailUser) {
 		props = new Properties();
 		props.put("mail.pop3.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 		props.put("mail.pop3.socketFactory.fallback", "false");
@@ -51,6 +56,27 @@ public class MailInbox {
 		props.put("mail.pop3.host", mailHost);
 		props.put("mail.pop3.user", mailUser);
 		props.put("mail.store.protocol", "pop3");
+	}
+
+	public static void tryConnection(String eMail, String password) throws MessagingException {
+		setProperties(eMail);
+		conect(eMail, password);
+	}
+
+	private ArrayList<String> identifications = new ArrayList<String>();
+
+	private JList<Message> mailInbox;
+
+	private MailWindow mailWindow;
+
+	private DefaultListModel<Message> messageModel;
+
+	public MailInbox(String mailUser, String mailPassword, DefaultListModel<Message> messageModel,
+			MailWindow mailWindow) {
+		this.mailUser = mailUser;
+		this.mailPassword = mailPassword;
+		this.mailWindow = mailWindow;
+		setProperties(mailUser);
 		this.messageModel = messageModel;
 		fillInbox();
 	}
@@ -75,28 +101,34 @@ public class MailInbox {
 	 *
 	 * @throws MessagingException
 	 */
-	public void fillInbox() throws MessagingException {
-		Session session = Session.getDefaultInstance(props);
-		store = session.getStore("pop3");
-		store.connect(mailHost, mailUser, mailPassword);
-		inbox = store.getFolder("Inbox");
-		inbox.open(Folder.READ_WRITE);
-		mailWindow.setTitle(mailUser + " (" + inbox.getUnreadMessageCount() + ")");
+	public void fillInbox() {
+		try {
+			conect(mailUser, mailPassword);
+			inbox = store.getFolder("Inbox");
+			inbox.open(Folder.READ_WRITE);
+			mailWindow.setTitle(mailUser + " (" + inbox.getUnreadMessageCount() + ")");
 
-		for (Message message : inbox.getMessages()) {
-			MimeMessage mime = (MimeMessage) message;
-			// Mensaje ya existe
-			if (!identifications.contains(mime.getMessageID())) {
-				messageModel.insertElementAt(message, 0);
-				identifications.add(mime.getMessageID());
+			for (Message message : inbox.getMessages()) {
+				MimeMessage mime = (MimeMessage) message;
+				// Mensaje ya existe
+				if (!identifications.contains(mime.getMessageID())) {
+					messageModel.insertElementAt(message, 0);
+					identifications.add(mime.getMessageID());
+				}
 			}
+			mailWindow.repaint();
+		} catch (MessagingException ex) {
+			JOptionPane.showMessageDialog(new JFrame(),
+					"No se pudo cargar el sistema de correo electrónico, cerrando aplicación...");
+			ex.printStackTrace();
+			System.exit(-1);
 		}
 	}
 
 	public void readMessage() {
 		if (mailInbox.getSelectedIndex() != -1) {
 			try {
-				MailRead mailRead = new MailRead(messageModel.elementAt(mailInbox.getSelectedIndex()));
+				MailReadWindow mailRead = new MailReadWindow(messageModel.elementAt(mailInbox.getSelectedIndex()));
 				mailRead.setVisible(true);
 				inbox.setFlags(new Message[] { messageModel.elementAt(mailInbox.getSelectedIndex()) },
 						new Flags(Flags.Flag.SEEN), true);
@@ -108,14 +140,9 @@ public class MailInbox {
 		}
 	}
 
-	public void refresh() {
-		try {
-			ThreadRefreshMail refresh = new ThreadRefreshMail(this);
-			refresh.start();
-		} catch (MessagingException | InterruptedException e) {
-			JOptionPane.showMessageDialog(new JFrame(),
-					"Error activando el refresco de ventanas, sus mensajes nuevos mensajes no se verán refrescados");
-		}
+	public void setAutoRefresh() {
+		ThreadRefreshMail refresh = new ThreadRefreshMail(this);
+		refresh.start();
 	}
 
 }

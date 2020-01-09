@@ -50,7 +50,7 @@ public class MailWindow extends JFrame {
 	 *
 	 * @throws MessagingException
 	 */
-	public MailWindow() throws MessagingException {
+	public MailWindow() {
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 600);
 
@@ -79,6 +79,7 @@ public class MailWindow extends JFrame {
 		listUserMails.setCellRenderer(new MessageRender());
 		JScrollPane scroll = new JScrollPane(listUserMails);
 		contentPane.add(scroll, BorderLayout.CENTER);
+		setVisible(false);
 	}
 
 	public JButton getBtnAbout() {

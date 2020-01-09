@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-import javax.mail.MessagingException;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import ftp.ClientFTP;
@@ -12,52 +12,53 @@ import ftp.FTPController;
 import ftp.Users;
 import interfaces.FTPWindow;
 import interfaces.MailWindow;
-import interfaces.StartMenu;
+import interfaces.StartMenuWindow;
 
-public class MainMenuController implements ActionListener{
-	Users user;
-	StartMenu StartMenu;
-	
-	public MainMenuController(Users user) {
+public class MainMenuController implements ActionListener {
+	private String pass;
+	private StartMenuWindow StartMenu;
+	private Users user;
+
+	public MainMenuController(Users user, String pass) {
 		this.user = user;
-		StartMenu = new StartMenu();
+		this.pass = pass;
+		StartMenu = new StartMenuWindow();
 		AsignarEventos();
-		
+
 	}
-	
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		MailWindow mailWindow = new MailWindow();
+		FTPWindow ftpWindow = new FTPWindow();
+		FTPController ftpController = new FTPController(mailWindow, ftpWindow, user);
+		MailController mailController = new MailController(user.geteMail(), pass, mailWindow, ftpWindow);
+		if (e.getSource() == StartMenu.getBtnFTP()) {
+			ftpController.getFtpWindow().setVisible(true);
+			try {
+				ClientFTP clientFTP = new ClientFTP(user);
+				clientFTP.connect();
+				StartMenu.setVisible(false);
+				if (!clientFTP.login()) {
+					JOptionPane.showMessageDialog(new JFrame(),
+							"Error al loguearse, no existe el usuario en el servidor FTP, contacte con el administrador del sistema.");
+				} else {
+					ftpController.setCliente(clientFTP);
+					ftpController.AsignarEventos();
+					ftpController.recargarDirectorio();
+				}
+				ftpWindow.setVisible(true);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		} else {
+			mailWindow.setVisible(true);
+			StartMenu.setVisible(false);
+		}
+	}
+
 	public void AsignarEventos() {
 		StartMenu.getBtnFTP().addActionListener(this);
 		StartMenu.getBtnMail().addActionListener(this);
-	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==StartMenu.getBtnFTP()) {			
-			FTPWindow FtpWindow = new FTPWindow();
-			MailWindow MailWindow;
-			try {
-				MailWindow = new MailWindow();
-				FTPController FtpController = new FTPController(MailWindow, FtpWindow, user);				
-				FtpController.getFtpWindow().setVisible(true);
-				try {
-					ClientFTP clientFTP = new ClientFTP(user);
-					clientFTP.connect();
-					if(!clientFTP.login()) {
-						JOptionPane.showMessageDialog(FtpController.getFtpWindow(), "Error al loguearse, no existe el usuario en el servidor FTP, contacte con el administrador del sistema.");
-					}else {
-						FtpController.setCliente(clientFTP);						
-						FtpController.AsignarEventos();
-						FtpController.recargarDirectorio();
-					}
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}				
-			} catch (MessagingException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}else {
-			
-		}
 	}
 }

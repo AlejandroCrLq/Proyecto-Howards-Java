@@ -20,7 +20,7 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
-import interfaces.MailRead;
+import interfaces.MailReadWindow;
 
 /**
  * La clase DescargaArchivoListener se encarga de
@@ -33,9 +33,9 @@ import interfaces.MailRead;
 public class ListenerFileDownload implements MouseListener, KeyListener {
 
 	private JList<Part> listFiles;
-	private MailRead mailRead;
+	private MailReadWindow mailRead;
 
-	public ListenerFileDownload(JList<Part> listFiles, MailRead read) {
+	public ListenerFileDownload(JList<Part> listFiles, MailReadWindow read) {
 		this.listFiles = listFiles;
 		mailRead = read;
 	}
