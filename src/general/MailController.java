@@ -22,7 +22,7 @@ public class MailController {
 				mailWindow);
 		try {
 			mailTools.fillInbox();
-			mailWindow.getBtnWriteMail().addActionListener(new events.ListenerOpenWriteMessage());
+			mailWindow.getBtnWriteMail().addActionListener(new Events.ListenerOpenWriteMessage());
 			mailTools.addListener(mailWindow.getListUserMails());
 			mailWindow.setVisible(true);
 			mailTools.refresh();

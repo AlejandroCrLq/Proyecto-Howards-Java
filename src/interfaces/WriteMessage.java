@@ -17,7 +17,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import events.ListenerSendMessage;
+import Events.ListenerSendMessage;
 
 public class WriteMessage extends JFrame {
 
@@ -99,7 +99,7 @@ public class WriteMessage extends JFrame {
 
 		DefaultListModel<File> fileModel = new DefaultListModel<File>();
 		JList<File> listFiles = new JList<File>(fileModel);
-		events.ListenerDeleteFileFromList deleteFileFromList = new events.ListenerDeleteFileFromList(listFiles,
+		Events.ListenerDeleteFileFromList deleteFileFromList = new Events.ListenerDeleteFileFromList(listFiles,
 				fileModel);
 		listFiles.addMouseListener(deleteFileFromList);
 		listFiles.addKeyListener(deleteFileFromList);
@@ -113,7 +113,7 @@ public class WriteMessage extends JFrame {
 		JButton btnAddFile = new JButton("Adjuntar archivo");
 		btnAddFile.setBounds(250, 505, 133, 25);
 		layeredPane.add(btnAddFile);
-		btnAddFile.addActionListener(new events.ListenerAddFile(fileModel));
+		btnAddFile.addActionListener(new Events.ListenerAddFile(fileModel));
 		setVisible(true);
 
 		btnSend.addActionListener(new ListenerSendMessage(fileModel, this));

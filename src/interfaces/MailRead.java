@@ -23,8 +23,8 @@ import javax.swing.border.EmptyBorder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import events.ListenerAnswerMessage;
-import events.ListenerFileDownload;
+import Events.ListenerAnswerMessage;
+import Events.ListenerFileDownload;
 import interfaces.cellrenders.FilePartRender;
 
 public class MailRead extends JFrame {

@@ -65,7 +65,7 @@ public class MailInbox {
 	 */
 	public void addListener(JList<Message> mailInbox) throws MessagingException {
 		this.mailInbox = mailInbox;
-		events.ListenerReadMessage listenerReadMail = new events.ListenerReadMessage(this);
+		Events.ListenerReadMessage listenerReadMail = new Events.ListenerReadMessage(this);
 		mailInbox.addMouseListener(listenerReadMail);
 		mailInbox.addKeyListener(listenerReadMail);
 	}
