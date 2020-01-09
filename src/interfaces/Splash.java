@@ -36,7 +36,7 @@ public class Splash extends JFrame implements Runnable {
 		setContentPane(contentPane);
 		this.setUndecorated(true);
 		JLabel label = new JLabel();
-		label.setIcon(new ImageIcon(Splash.class.getResource("/interfaces/logo.jpg")));
+		label.setIcon(new ImageIcon(Splash.class.getResource("/imagenes/logo.jpg")));
 		contentPane.add(label, BorderLayout.CENTER);
 	}
 
