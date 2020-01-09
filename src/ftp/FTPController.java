@@ -16,6 +16,7 @@ import java.sql.Statement;
 import java.util.Calendar;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -38,7 +39,7 @@ public class FTPController {
 	MailWindow mailWindow;
 	Users user;
 	ClientFTP cliente;
-	static File selected= new File ("C:\\");
+	static File selected = new File("C:\\");
 	JList<File> listFiles;
 
 	public JList<File> getListFiles() {
@@ -122,7 +123,7 @@ public class FTPController {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 				if (e.getClickCount() == 2) {
 					File fichero = (File) ftpWindow.getListFiles().getModel()
 							.getElementAt(ftpWindow.getListFiles().getSelectedIndex());
@@ -130,6 +131,43 @@ public class FTPController {
 					if (fichero.isDirectory()) {
 						recargarDatosJList(ftpWindow.getListFiles(), fichero);
 					}
+				}
+			}
+
+		});
+
+		ftpWindow.getBtnSubir().addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser chooser = new JFileChooser();
+				chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+				int returnVal = chooser.showOpenDialog(null);
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					String local = chooser.getSelectedFile().getAbsolutePath();
+					String remote = selected.getAbsolutePath(); // En esta linea habrá que comprobar si es correcto.
+
+					TransferFTP transfer = new TransferFTP(user, local, remote, true);
+				}
+			}
+
+		});
+
+		ftpWindow.getBtnSubirCarpeta().addActionListener(new ActionListener() { // SUBIR CARPETA ES EL BOTÓN DE
+																				// DESCARGA, HAY QUE CAMBIARLO
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser chooser = new JFileChooser();
+				chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				int returnVal = chooser.showOpenDialog(null);
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					String local = chooser.getSelectedFile().getAbsolutePath();
+					String remote = selected.getAbsolutePath(); // En esta linea habrá que comprobar si el selected es
+																// correcto.
+
+					TransferFTP transfer = new TransferFTP(user, local, remote, false);
+
 				}
 			}
 
