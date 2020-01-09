@@ -181,6 +181,7 @@ public class WriteMessage extends JFrame {
 		});
 		btnSend.setBounds(360, 335, 97, 25);
 		layeredPane.add(btnSend);
+		this.setResizable(false);
 		setVisible(true);
 
 	}

@@ -76,6 +76,7 @@ public class Login extends JFrame {
 		});
 		loginButton.setBounds(142, 205, 97, 25);
 		layeredPane.add(loginButton);
+		this.setResizable(false);
 		this.setVisible(true);
 	}
 	

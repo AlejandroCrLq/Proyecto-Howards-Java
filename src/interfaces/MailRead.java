@@ -42,6 +42,7 @@ public class MailRead extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		this.setResizable(false);
 
 		JLabel lblDe = new JLabel("De: ");
 		lblDe.setText(lblDe.getText() + message.getFrom()[0]);

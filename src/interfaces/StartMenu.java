@@ -63,6 +63,7 @@ public class StartMenu extends JFrame {
 		lblCargarArchivos.setBounds(580, 41, 175, 16);
 		layeredPane.add(lblCargarArchivos);
 		this.setLocationRelativeTo(null);
+		this.setResizable(false);
 		this.setVisible(true);
 	}
 

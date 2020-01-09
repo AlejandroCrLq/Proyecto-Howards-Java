@@ -47,6 +47,7 @@ public class MailWindow extends JFrame {
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
+		this.setResizable(false);
 		
 		JMenu menu = new JMenu("");
 		menuBar.add(menu);
