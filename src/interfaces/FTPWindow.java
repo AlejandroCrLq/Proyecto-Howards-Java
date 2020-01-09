@@ -12,6 +12,7 @@ package interfaces;
 import java.awt.BorderLayout;
 import java.awt.ComponentOrientation;
 import java.awt.EventQueue;
+import java.awt.Image;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,6 +23,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 
 public class FTPWindow extends JFrame {
@@ -51,6 +53,9 @@ public class FTPWindow extends JFrame {
 		
 		JMenu menu = new JMenu("");
 		menuBar.add(menu);
+		
+		Image icon = new ImageIcon(this.getClass().getResource("/imagenes/logo.jpg")).getImage();
+		setIconImage(icon);
 		
 		btnOpenEmail = new JButton("Correo");
 		menuBar.add(btnOpenEmail);

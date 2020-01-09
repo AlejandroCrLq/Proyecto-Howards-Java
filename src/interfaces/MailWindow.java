@@ -11,6 +11,7 @@ package interfaces;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -27,6 +28,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JCheckBoxMenuItem;
 import javax.mail.MessagingException;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JList;
 
@@ -51,6 +53,9 @@ public class MailWindow extends JFrame {
 		
 		JMenu menu = new JMenu("");
 		menuBar.add(menu);
+		
+		Image icon = new ImageIcon(this.getClass().getResource("/imagenes/logo.jpg")).getImage();
+		setIconImage(icon);
 		
 		btnOpenFTP = new JButton("FTP");
 		menuBar.add(btnOpenFTP);

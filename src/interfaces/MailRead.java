@@ -2,6 +2,7 @@ package interfaces;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -22,6 +23,7 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.Part;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class MailRead extends JFrame {
@@ -49,6 +51,9 @@ public class MailRead extends JFrame {
 		lblDe.setBounds(27, 26, 521, 14);
 		contentPane.add(lblDe);
 
+		Image icon = new ImageIcon(this.getClass().getResource("/imagenes/logo.jpg")).getImage();
+		setIconImage(icon);
+		
 		JLabel lblAsunto = new JLabel("Asunto: ");
 		lblAsunto.setText(lblAsunto.getText() + message.getSubject());
 		lblAsunto.setBounds(37, 53, 521, 14);

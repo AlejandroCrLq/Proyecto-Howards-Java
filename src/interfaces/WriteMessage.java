@@ -12,6 +12,7 @@ package interfaces;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.UnsupportedEncodingException;
@@ -24,6 +25,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -74,6 +76,9 @@ public class WriteMessage extends JFrame {
 		setContentPane(contentPane);
 
 		this.setLocationRelativeTo(null);
+		
+		Image icon = new ImageIcon(this.getClass().getResource("/imagenes/logo.jpg")).getImage();
+		setIconImage(icon);
 
 		JLayeredPane layeredPane = new JLayeredPane();
 		contentPane.add(layeredPane, BorderLayout.CENTER);

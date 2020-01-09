@@ -21,10 +21,12 @@ import javax.swing.JTabbedPane;
 import javax.swing.JLayeredPane;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.Image;
 
 public class Login extends JFrame {
 	private JPanel contentPane;
@@ -45,6 +47,9 @@ public class Login extends JFrame {
 		setContentPane(contentPane);
 		
 		this.setLocationRelativeTo(null);
+		
+		Image icon = new ImageIcon(this.getClass().getResource("/imagenes/logo.jpg")).getImage();
+		setIconImage(icon);
 		
 		JLayeredPane layeredPane = new JLayeredPane();
 		contentPane.add(layeredPane, BorderLayout.CENTER);

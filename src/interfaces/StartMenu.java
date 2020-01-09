@@ -12,6 +12,7 @@ package interfaces;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -47,6 +48,8 @@ public class StartMenu extends JFrame {
 		btnMail.setBounds(65, 70, 389, 593);
 		layeredPane.add(btnMail);
 		
+		Image icon = new ImageIcon(this.getClass().getResource("/imagenes/logo.jpg")).getImage();
+		setIconImage(icon);
 		
 		btnFTP = new JButton("");
 		btnFTP.setIcon(new ImageIcon(this.getClass().getResource("/imagenes/FTP.png")));
