@@ -11,5 +11,13 @@
 	<classpathentry kind="lib" path="C:/librerias/javax.activation-1.1.0.v201105071233.jar"/>
 	<classpathentry kind="lib" path="C:/librerias/javax.mail.jar"/>
 	<classpathentry kind="lib" path="C:/librerias/jsoup-1.12.1.jar"/>
+	<classpathentry kind="lib" path="C:/librerias/commons-io-2.6-bin/commons-io-2.6/commons-io-2.6.jar"/>
+	<classpathentry kind="lib" path="C:/librerias/commons-io-2.6-bin/commons-io-2.6/commons-io-2.6-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/librerias/commons-io-2.6-bin/commons-io-2.6/commons-io-2.6-sources.jar"/>
+	<classpathentry kind="lib" path="C:/librerias/commons-io-2.6-bin/commons-io-2.6/commons-io-2.6-tests.jar"/>
+	<classpathentry kind="lib" path="C:/librerias/commons-io-2.6-bin/commons-io-2.6/commons-io-2.6-test-sources.jar"/>
+	<classpathentry kind="lib" path="C:/librerias/commons-net-3.6-bin/commons-net-3.6/commons-net-3.6.jar"/>
+	<classpathentry kind="lib" path="C:/librerias/commons-net-3.6-bin/commons-net-3.6/commons-net-3.6-sources.jar"/>
+	<classpathentry kind="lib" path="C:/librerias/commons-net-3.6-bin/commons-net-3.6/commons-net-examples-3.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
