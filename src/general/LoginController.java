@@ -7,10 +7,13 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.util.Base64;
+
+import javax.mail.MessagingException;
 import javax.swing.JOptionPane;
 
 import ftp.Users;
 import interfaces.LoginWindow;
+import mail.MailInbox;
 
 /**
  * Clase que controla el acceso del usuario.
@@ -19,20 +22,15 @@ import interfaces.LoginWindow;
  *
  */
 public class LoginController implements ActionListener {
-	LoginWindow log;
+
 	ConnectionToDatabase connect;
+	LoginWindow log;
+
 	ResultSet rs;
 
 	public LoginController(LoginWindow log, ConnectionToDatabase connect) {
 		this.log = log;
 		this.connect = connect;
-	}
-
-	/**
-	 * Mï¿½todo que aï¿½ade los listeners al botï¿½n del login.
-	 */
-	public void addListeners() {
-		log.getBtnNewButton().addActionListener(this);
 	}
 
 	/**
@@ -43,11 +41,12 @@ public class LoginController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(log.getBtnNewButton())) {
 			try {
-				rs = connect.getSentencia().executeQuery(
-						"SELECT email FROM users WHERE email like '" + log.getUser().getText().trim() + "';");
+				String sqlEmails = "SELECT email FROM users WHERE email like '" + log.getUser().getText().trim() + "';";
+				rs = connect.getSentencia().executeQuery(sqlEmails);
 				if (rs.next()) {
-					rs = connect.getSentencia().executeQuery(
-							"SELECT password FROM users where email like '" + log.getUser().getText().trim() + "';");
+					String sqlPasswords = "SELECT password FROM users where email like '"
+							+ log.getUser().getText().trim() + "';";
+					rs = connect.getSentencia().executeQuery(sqlPasswords);
 					if (rs.next() && decryptPassword(rs.getString(1))) {
 
 						Users user = new Users();
@@ -66,10 +65,20 @@ public class LoginController implements ActionListener {
 						rs.next();
 						user.setTeacher(rs.getBoolean(1));
 
+						String email = user.geteMail();
+						String pass = log.geteMailPasswordField().getText();
+
+						try {
+							MailInbox.tryConnection(email, pass);
+						} catch (MessagingException ex) {
+							ex.printStackTrace();
+							throw new Exception();
+						}
 						JOptionPane.showMessageDialog(null, "Acceso concedido.", "CORRECTO",
 								JOptionPane.INFORMATION_MESSAGE);
-						log.dispose();
-						new MainMenuController(user);
+						MailInbox.setMailPassword(pass);
+						log.setVisible(false);
+						new MainMenuController(user, pass);
 					} else {
 						throw new Exception();
 					}
@@ -77,10 +86,18 @@ public class LoginController implements ActionListener {
 					throw new Exception();
 				}
 			} catch (Exception a) {
-				JOptionPane.showMessageDialog(null, "Usuario o contraseña erróneo.", "ERROR",
+				a.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Usuario, contraseña o contraseña de correo erróneo/s", "ERROR",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
+	}
+
+	/**
+	 * Mï¿½todo que aï¿½ade los listeners al botï¿½n del login.
+	 */
+	public void addListeners() {
+		log.getBtnNewButton().addActionListener(this);
 	}
 
 	/**

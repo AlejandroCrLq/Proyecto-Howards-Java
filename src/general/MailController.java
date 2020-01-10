@@ -2,6 +2,7 @@ package general;
 
 import javax.mail.MessagingException;
 
+import Events.ListenerOpenFrame;
 import interfaces.FTPWindow;
 import interfaces.MailWindow;
 import mail.MailInbox;
@@ -26,8 +27,8 @@ public class MailController {
 		try {
 			mailTools.fillInbox();
 			this.mailWindow.getBtnWriteMail().addActionListener(new Events.ListenerOpenWriteMessage());
+			this.mailWindow.getBtnOpenFTP().addActionListener(new ListenerOpenFrame(ftpWindow,mailWindow));
 			mailTools.addListener(this.mailWindow.getListUserMails());
-			this.mailWindow.setVisible(true);
 			mailTools.setAutoRefresh();
 		} catch (MessagingException e) {
 			e.printStackTrace();
