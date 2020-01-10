@@ -16,6 +16,7 @@ import java.sql.Statement;
 import java.util.Calendar;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -38,7 +39,7 @@ public class FTPController {
 	MailWindow mailWindow;
 	Users user;
 	ClientFTP cliente;
-	static File selected= new File ("C:\\");
+	static File selected = new File("C:\\");
 	JList<File> listFiles;
 
 	public JList<File> getListFiles() {
@@ -57,7 +58,7 @@ public class FTPController {
 		this.ftpWindow = ftpWindow;
 		this.mailWindow = mailWindow;
 		this.user = user;
-		listFiles = ftpWindow.getListFiles();
+		// listFiles = ftpWindow.getListFiles();
 		listFiles = cargarDatosJList(new File("C:\\"));
 		ftpWindow.setListFiles(listFiles);
 		JScrollPane scrollPane = new JScrollPane(listFiles);
@@ -88,6 +89,7 @@ public class FTPController {
 				} else {
 					recursiveDeletion(fileToDelete.getAbsolutePath());
 				}
+				recargarDatosJList(ftpWindow.getListFiles(), fileToDelete.getParentFile());
 				recargarDirectorio();
 
 			}
@@ -103,17 +105,17 @@ public class FTPController {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String path;
 				if (selected != null) {
-					String path = selected.getPath();
-					File fichero = new File(
-							path + "\\" + JOptionPane.showInputDialog("Introduce el nombre de la carpeta:"));
-					fichero.mkdir();
+					path = selected.getPath();
+
 				} else {
-					String path = "C:\\";
-					File fichero = new File(
-							path + "\\" + JOptionPane.showInputDialog("Introduce el nombre de la carpeta:"));
-					fichero.mkdir();
+					path = "C:\\";
 				}
+				File fichero = new File(
+						path + "\\" + JOptionPane.showInputDialog("Introduce el nombre de la carpeta:"));
+				fichero.mkdir();
+				recargarDatosJList(ftpWindow.getListFiles(), fichero.getParentFile());
 			}
 
 		});
@@ -122,14 +124,51 @@ public class FTPController {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				File fichero = (File) ftpWindow.getListFiles().getModel()
+						.getElementAt(ftpWindow.getListFiles().getSelectedIndex());
+				selected = fichero;
 				if (e.getClickCount() == 2) {
-					File fichero = (File) ftpWindow.getListFiles().getModel()
-							.getElementAt(ftpWindow.getListFiles().getSelectedIndex());
-					selected = fichero;
+
 					if (fichero.isDirectory()) {
 						recargarDatosJList(ftpWindow.getListFiles(), fichero);
 					}
+				}
+			}
+
+		});
+
+		ftpWindow.getBtnSubir().addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser chooser = new JFileChooser();
+				chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+				int returnVal = chooser.showOpenDialog(null);
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					String local = chooser.getSelectedFile().getAbsolutePath();
+					String remote = selected.getAbsolutePath(); // En esta linea habr� que comprobar si es correcto.
+
+					TransferFTP transfer = new TransferFTP(user, local, remote, true);
+				}
+			}
+
+		});
+
+		ftpWindow.getBtnSubirCarpeta().addActionListener(new ActionListener() { // SUBIR CARPETA ES EL BOT�N DE
+																				// DESCARGA, HAY QUE CAMBIARLO
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser chooser = new JFileChooser();
+				chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				int returnVal = chooser.showOpenDialog(null);
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					String local = chooser.getSelectedFile().getAbsolutePath();
+					String remote = selected.getAbsolutePath(); // En esta linea habr� que comprobar si el selected es
+																// correcto.
+
+					TransferFTP transfer = new TransferFTP(user, local, remote, false);
+
 				}
 			}
 
@@ -179,15 +218,19 @@ public class FTPController {
 	}
 
 	public static void recargarDatosJList(JList<File> list, File directorioACargar) {
-
-		File directorioAnterior = directorioACargar.getParentFile();
-		File[] listFiles;
-		if (directorioAnterior != null) {
-			listFiles = combine(new File[] { directorioAnterior }, directorioACargar.listFiles());
+		if (directorioACargar == null) {
+			//ClientFTP cliente = new ClientFTP(user);
+			directorioACargar = new File("C:\\");
 		} else {
-			listFiles = directorioACargar.listFiles();
+			File directorioAnterior = directorioACargar.getParentFile();
+			File[] listFiles;
+			if (directorioAnterior != null) {
+				listFiles = combine(new File[] { directorioAnterior }, directorioACargar.listFiles());
+			} else {
+				listFiles = directorioACargar.listFiles();
+			}
+			list.setListData(listFiles);
 		}
-		list.setListData(listFiles);
 	}
 
 	public void recursiveDeletion(String path) {
@@ -205,6 +248,7 @@ public class FTPController {
 			}
 		}
 		currentFolder.delete();
+		selected = null;
 	}
 
 	public void registrarMovimiento(String accion, String usuario, String rutaArchivo) {
