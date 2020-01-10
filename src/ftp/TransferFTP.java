@@ -17,40 +17,6 @@ public class TransferFTP {
 
 	private Users user;
 
-<<<<<<< HEAD
-	public static void main(String[] args) {
-		/*
-		 * Todo esto es temporal para poder hacer las pruebas, el localfile y remotefile
-		 * debe llegar desde la ventana, y user debe estar en memoria. 
-		 */
-		
-=======
-	/*public static void main(String[] args) {
-		/*
-		 * Todo esto es temporal para poder hacer las pruebas, el localfile y remotefile
-		 * debe llegar desde la ventana, y user debe estar en memoria. 
-		 */
-		/*
->>>>>>> refs/heads/FTPChanges
-		Users user = new Users();
-		user.seteMail("rbarranco");
-		user.setUserName("Rafael Barranco");
-		user.setPassword("1234567890");
-		user.setTeacher(false);
-
-		String fileName = "gollum.jpg";
-		String directory = "C:\\Users\\rafae\\OneDrive\\Documentos\\Proyecto Multidisciplinar\\";
-		String remoteFolder = "..";
-
-		// File fileFromPicker = new File(directory, fileName);
-		String fileFromPicker = "peval1";
-		String local = "C:\\peval3\\";
-
-		// TransferFTP t = new TransferFTP(user, fileFromPicker, remoteFolder); // Carga
-		TransferFTP t = new TransferFTP(user, local, fileFromPicker, true); // Descarga
-
-	}*/
-
 	public TransferFTP(Users user, String local, String remote, boolean upload) {
 
 		try {
