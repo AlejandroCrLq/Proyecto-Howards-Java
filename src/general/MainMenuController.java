@@ -38,6 +38,7 @@ public class MainMenuController implements ActionListener {
 				ClientFTP clientFTP = new ClientFTP(user);
 				clientFTP.connect();
 				StartMenu.setVisible(false);
+				mailWindow.setVisible(false);
 				if (!clientFTP.login()) {
 					JOptionPane.showMessageDialog(new JFrame(),
 							"Error al loguearse, no existe el usuario en el servidor FTP, contacte con el administrador del sistema.");
@@ -52,6 +53,7 @@ public class MainMenuController implements ActionListener {
 			}
 		} else if (e.getSource() == StartMenu.getBtnMail()){
 			mailWindow.setVisible(true);
+			ftpWindow.setVisible(false);
 			StartMenu.setVisible(false);
 		}
 	}

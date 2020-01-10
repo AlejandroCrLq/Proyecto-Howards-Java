@@ -17,7 +17,7 @@ public class ListenerOpenFrame implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		FtpWindow.setVisible(false);
-		MailWindow.setVisible(true);
+		FtpWindow.setVisible(!FtpWindow.isVisible());
+		MailWindow.setVisible(!MailWindow.isVisible());
 	}
 }

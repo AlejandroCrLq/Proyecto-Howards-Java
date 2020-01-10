@@ -30,6 +30,7 @@ public class MailController {
 			this.mailWindow.getBtnOpenFTP().addActionListener(new ListenerOpenFrame(ftpWindow,mailWindow));
 			mailTools.addListener(this.mailWindow.getListUserMails());
 			mailTools.setAutoRefresh();
+			this.mailWindow.setVisible(true);
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}

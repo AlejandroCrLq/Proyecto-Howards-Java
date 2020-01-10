@@ -25,6 +25,17 @@ public class MailWindow extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(() -> {
+			try {
+				MailWindow frame = new MailWindow();
+				frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+	}
+
 	private JButton btnAbout;
 	private JButton btnOpenFTP;
 	private JButton btnWriteMail;
