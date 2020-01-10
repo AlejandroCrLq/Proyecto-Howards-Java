@@ -58,7 +58,7 @@ public class FTPController {
 		this.ftpWindow = ftpWindow;
 		this.mailWindow = mailWindow;
 		this.user = user;
-		//listFiles = ftpWindow.getListFiles();
+		// listFiles = ftpWindow.getListFiles();
 		listFiles = cargarDatosJList(new File("C:\\"));
 		ftpWindow.setListFiles(listFiles);
 		JScrollPane scrollPane = new JScrollPane(listFiles);
@@ -108,7 +108,7 @@ public class FTPController {
 				String path;
 				if (selected != null) {
 					path = selected.getPath();
-					
+
 				} else {
 					path = "C:\\";
 				}
@@ -125,10 +125,10 @@ public class FTPController {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				File fichero = (File) ftpWindow.getListFiles().getModel()
-								.getElementAt(ftpWindow.getListFiles().getSelectedIndex());
+						.getElementAt(ftpWindow.getListFiles().getSelectedIndex());
 				selected = fichero;
 				if (e.getClickCount() == 2) {
-					
+
 					if (fichero.isDirectory()) {
 						recargarDatosJList(ftpWindow.getListFiles(), fichero);
 					}
@@ -218,15 +218,19 @@ public class FTPController {
 	}
 
 	public static void recargarDatosJList(JList<File> list, File directorioACargar) {
-
-		File directorioAnterior = directorioACargar.getParentFile();
-		File[] listFiles;
-		if (directorioAnterior != null) {
-			listFiles = combine(new File[] { directorioAnterior }, directorioACargar.listFiles());
+		if (directorioACargar == null) {
+			//ClientFTP cliente = new ClientFTP(user);
+			directorioACargar = new File("C:\\");
 		} else {
-			listFiles = directorioACargar.listFiles();
+			File directorioAnterior = directorioACargar.getParentFile();
+			File[] listFiles;
+			if (directorioAnterior != null) {
+				listFiles = combine(new File[] { directorioAnterior }, directorioACargar.listFiles());
+			} else {
+				listFiles = directorioACargar.listFiles();
+			}
+			list.setListData(listFiles);
 		}
-		list.setListData(listFiles);
 	}
 
 	public void recursiveDeletion(String path) {
@@ -244,6 +248,7 @@ public class FTPController {
 			}
 		}
 		currentFolder.delete();
+		selected = null;
 	}
 
 	public void registrarMovimiento(String accion, String usuario, String rutaArchivo) {
