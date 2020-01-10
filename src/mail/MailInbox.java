@@ -14,7 +14,7 @@ import javax.mail.Session;
 import javax.mail.Store;
 import javax.swing.JList;
 
-import interfaces.MailRead;
+import interfaces.MailReadWindow;
 import interfaces.MailWindow;
 
 public class MailInbox {
@@ -81,7 +81,7 @@ public class MailInbox {
 					// Double-click detected
 					int index = list.locationToIndex(evt.getPoint());
 					try {
-						MailRead mailRead = new MailRead(messages[messages.length - index - 1]);
+						MailReadWindow mailRead = new MailReadWindow(messages[messages.length - index - 1]);
 						mailRead.setVisible(true);
 					} catch (MessagingException | IOException e) {
 						// TODO Auto-generated catch block

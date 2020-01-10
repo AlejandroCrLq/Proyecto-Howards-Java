@@ -12,15 +12,15 @@ import ftp.FTPController;
 import ftp.Users;
 import interfaces.FTPWindow;
 import interfaces.MailWindow;
-import interfaces.StartMenu;
+import interfaces.StartMenuWindow;
 
 public class MainMenuController implements ActionListener{
 	Users user;
-	StartMenu StartMenu;
+	StartMenuWindow StartMenu;
 	
 	public MainMenuController(Users user) {
 		this.user = user;
-		StartMenu = new StartMenu();
+		StartMenu = new StartMenuWindow();
 		AsignarEventos();
 		
 	}

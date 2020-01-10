@@ -10,7 +10,7 @@ import java.util.Base64;
 import javax.swing.JOptionPane;
 
 import ftp.Users;
-import interfaces.Login;
+import interfaces.LoginWindow;
 
 /**
  * Clase que controla el acceso del usuario.
@@ -19,11 +19,11 @@ import interfaces.Login;
  *
  */
 public class LoginController implements ActionListener {
-	Login log;
+	LoginWindow log;
 	ConnectionToDatabase connect;
 	ResultSet rs;
 
-	public LoginController(Login log, ConnectionToDatabase connect) {
+	public LoginController(LoginWindow log, ConnectionToDatabase connect) {
 		this.log = log;
 		this.connect = connect;
 	}

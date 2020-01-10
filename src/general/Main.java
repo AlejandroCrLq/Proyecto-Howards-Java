@@ -1,6 +1,6 @@
 package general;
 
-import interfaces.Login;
+import interfaces.LoginWindow;
 import interfaces.Splash;
 
 public class Main {

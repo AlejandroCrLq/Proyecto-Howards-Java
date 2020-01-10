@@ -20,7 +20,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class StartMenu extends JFrame {
+public class StartMenuWindow extends JFrame {
 	
 	private JPanel contentPane;
 	private JButton btnFTP;
@@ -29,7 +29,7 @@ public class StartMenu extends JFrame {
 	/**
 	 * Create the frame and fill it.
 	 */
-	public StartMenu() {
+	public StartMenuWindow() {
 		setTitle("Universidad de Howards");
 		setBounds(100, 100, 450, 300);
 		JLayeredPane layeredPane = new JLayeredPane();

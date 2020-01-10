@@ -58,7 +58,7 @@ public class MailWindow extends JFrame {
 		btnWriteMail.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				WriteMessage write = new WriteMessage();
+				WriteMessageWindow write = new WriteMessageWindow();
 			}
 		});
 		menuBar.add(btnWriteMail);

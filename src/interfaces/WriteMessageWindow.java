@@ -37,7 +37,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.sun.mail.smtp.SMTPAddressFailedException;
 
-public class WriteMessage extends JFrame {
+public class WriteMessageWindow extends JFrame {
 	private JPanel contentPane;
 	private JTextField textFor;
 	private JTextField textSubject;
@@ -52,7 +52,7 @@ public class WriteMessage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					WriteMessage frame = new WriteMessage();
+					WriteMessageWindow frame = new WriteMessageWindow();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -64,7 +64,7 @@ public class WriteMessage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public WriteMessage() {
+	public WriteMessageWindow() {
 		setTitle("Universidad de Howards");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 420);

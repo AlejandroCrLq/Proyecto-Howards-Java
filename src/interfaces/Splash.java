@@ -50,7 +50,7 @@ public class Splash extends JFrame implements Runnable {
 			this.setLocationRelativeTo(null);
 			this.setVisible(true);
 			Thread.sleep(4000);
-			Login log = new Login();
+			LoginWindow log = new LoginWindow();
 			ConnectionToDatabase connect = new ConnectionToDatabase();
 			LoginController control = new LoginController(log, connect);
 			control.addListeners();

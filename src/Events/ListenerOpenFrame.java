@@ -5,10 +5,10 @@ import java.awt.event.ActionListener;
 import interfaces.MailWindow;
 import interfaces.FTPWindow;
 
-public class ListenerOpenMail implements ActionListener{
+public class ListenerOpenFrame implements ActionListener{
 	MailWindow MailWindow;
 	FTPWindow FtpWindow;
-	public ListenerOpenMail(MailWindow MailWindow,FTPWindow FtpWindow) {
+	public ListenerOpenFrame(MailWindow MailWindow,FTPWindow FtpWindow) {
 		this.MailWindow = MailWindow;
 		this.FtpWindow = FtpWindow;
 	}

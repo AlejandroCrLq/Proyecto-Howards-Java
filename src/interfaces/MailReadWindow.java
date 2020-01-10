@@ -24,7 +24,7 @@ import javax.mail.Multipart;
 import javax.mail.Part;
 import javax.swing.JButton;
 
-public class MailRead extends JFrame {
+public class MailReadWindow extends JFrame {
 
 	private JPanel contentPane;
 	private JTextArea textField;
@@ -35,7 +35,7 @@ public class MailRead extends JFrame {
 	 * @throws MessagingException
 	 * @throws IOException
 	 */
-	public MailRead(Message message) throws MessagingException, IOException {
+	public MailReadWindow(Message message) throws MessagingException, IOException {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 600, 350);
 		contentPane = new JPanel();
@@ -67,7 +67,7 @@ public class MailRead extends JFrame {
 		btnResponder.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				WriteMessage write = new WriteMessage();
+				WriteMessageWindow write = new WriteMessageWindow();
 				try {
 					String from = message.getFrom()[0].toString();
 					from = from.substring(from.indexOf("<")+1, from.indexOf(">"));

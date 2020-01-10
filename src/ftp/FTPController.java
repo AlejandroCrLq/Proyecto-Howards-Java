@@ -28,7 +28,7 @@ import Events.ListenerChangeDirectory_LoadFiles;
 import Events.ListenerDeleteFiles;
 import Events.ListenerFTPRefresh;
 import Events.ListenerNameChange;
-import Events.ListenerOpenMail;
+import Events.ListenerOpenFrame;
 import general.ConnectionToDatabase;
 import interfaces.FTPWindow;
 import interfaces.MailWindow;
@@ -96,7 +96,7 @@ public class FTPController {
 
 		});
 
-		ftpWindow.getBtnOpenEmail().addActionListener(new ListenerOpenMail(mailWindow, ftpWindow));
+		ftpWindow.getBtnOpenEmail().addActionListener(new ListenerOpenFrame(mailWindow, ftpWindow));
 		ftpWindow.getTxtFileName().addActionListener(
 				new ListenerNameChange(ftpWindow.getLblFilePath(), ftpWindow.getTxtFileName(), this));
 		ftpWindow.getBtnRefrescar().addActionListener(new ListenerFTPRefresh(this));

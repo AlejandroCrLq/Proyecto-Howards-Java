@@ -26,7 +26,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
-public class Login extends JFrame {
+public class LoginWindow extends JFrame {
 	private JPanel contentPane;
 	private JButton loginButton;
 	private JTextField textUser;
@@ -35,7 +35,7 @@ public class Login extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Login() {
+	public LoginWindow() {
 		setTitle("Universidad de Howards");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
