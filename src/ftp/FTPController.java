@@ -64,6 +64,7 @@ public class FTPController {
 		JScrollPane scrollPane = new JScrollPane(listFiles);
 		ftpWindow.getPanel().add(scrollPane, BorderLayout.CENTER);
 		ftpWindow.repaint();
+		AsignarEventos();
 	}
 
 	public void AsignarEventos() {

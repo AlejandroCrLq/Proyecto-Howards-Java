@@ -44,7 +44,6 @@ public class MainMenuController implements ActionListener {
 							"Error al loguearse, no existe el usuario en el servidor FTP, contacte con el administrador del sistema.");
 				} else {
 					ftpController.setCliente(clientFTP);
-					ftpController.AsignarEventos();
 					ftpController.recargarDirectorio();
 				}
 				ftpWindow.setVisible(true);
